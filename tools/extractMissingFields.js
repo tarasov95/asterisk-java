@@ -1,3 +1,5 @@
+//extract missing fileds & classes from the log, for example:
+//cscript /Nologo extractMissingFields.js /log:"/r/proj/fs/aster/master/agi/agi-agent/log/agi.log"
 function GetFileStream(sPath) {
 	var oFso = new ActiveXObject("Scripting.FileSystemObject");
 	return oFso.OpenTextFile(sPath, 1, false, -2);
@@ -52,4 +54,4 @@ function main(sLogPath) {
 	reportMissing(mapClassEvent);
 }
 
-main(WScript.Arguments.Named.Item("log")||"/r/proj/fs/aster/master/agi/agi-agent/log/agi.log");
+main(WScript.Arguments.Named.Item("log"));

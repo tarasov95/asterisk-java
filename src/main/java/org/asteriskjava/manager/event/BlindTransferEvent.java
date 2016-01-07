@@ -35,6 +35,11 @@ public class BlindTransferEvent extends AbstractBridgeEvent
 	private String extension;
 	private String isexternal;
 	private String result;
+	
+	private String transfereelinkedid;
+	private String transfererlanguage;
+	private String transfereelanguage;
+	private String transfererlinkedid;
 
 	public BlindTransferEvent(Object source)
 	{
@@ -279,5 +284,61 @@ public class BlindTransferEvent extends AbstractBridgeEvent
 	public void setTransfereeExten(String transfereeExten)
 	{
 		this.transfereeExten = transfereeExten;
+	}
+
+	/**
+	 * @return the transfereelinkedid
+	 */
+	public String getTransfereelinkedid() {
+		return transfereelinkedid;
+	}
+
+	/**
+	 * @param transfereelinkedid the transfereelinkedid to set
+	 */
+	public void setTransfereelinkedid(String transfereelinkedid) {
+		this.transfereelinkedid = transfereelinkedid;
+	}
+
+	/**
+	 * @return the transfererlanguage
+	 */
+	public String getTransfererlanguage() {
+		return transfererlanguage;
+	}
+
+	/**
+	 * @param transfererlanguage the transfererlanguage to set
+	 */
+	public void setTransfererlanguage(String transfererlanguage) {
+		this.transfererlanguage = transfererlanguage;
+	}
+
+	/**
+	 * @return the transfereelanguage
+	 */
+	public String getTransfereelanguage() {
+		return transfereelanguage;
+	}
+
+	/**
+	 * @param transfereelanguage the transfereelanguage to set
+	 */
+	public void setTransfereelanguage(String transfereelanguage) {
+		this.transfereelanguage = transfereelanguage;
+	}
+
+	/**
+	 * @return the transfererlinkedid
+	 */
+	public String getTransfererlinkedid() {
+		return transfererlinkedid;
+	}
+
+	/**
+	 * @param transfererlinkedid the transfererlinkedid to set
+	 */
+	public void setTransfererlinkedid(String transfererlinkedid) {
+		this.transfererlinkedid = transfererlinkedid;
 	}
 }
