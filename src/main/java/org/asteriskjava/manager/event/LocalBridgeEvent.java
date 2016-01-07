@@ -63,6 +63,8 @@ public class LocalBridgeEvent extends ManagerEvent
     private String localOneCalleridNum;
     private String localTwoConnectedLineName;
     private String localTwoConnectedLineNum;
+		private String localonelinkedid;
+    private String localtwolinkedid;
 
     public LocalBridgeEvent(Object source)
     {
@@ -383,4 +385,32 @@ public class LocalBridgeEvent extends ManagerEvent
     {
         this.localTwoConnectedLineNum = localTwoConnectedLineNum;
     }
+
+	/**
+	 * @return the localonelinkedid
+	 */
+	public String getLocalonelinkedid() {
+		return localonelinkedid;
+	}
+
+	/**
+	 * @param localonelinkedid the localonelinkedid to set
+	 */
+	public void setLocalonelinkedid(String localonelinkedid) {
+		this.localonelinkedid = localonelinkedid;
+	}
+
+	/**
+	 * @return the localtwolinkedid
+	 */
+	public String getLocaltwolinkedid() {
+		return localtwolinkedid;
+	}
+
+	/**
+	 * @param localtwolinkedid the localtwolinkedid to set
+	 */
+	public void setLocaltwolinkedid(String localtwolinkedid) {
+		this.localtwolinkedid = localtwolinkedid;
+	}
 }

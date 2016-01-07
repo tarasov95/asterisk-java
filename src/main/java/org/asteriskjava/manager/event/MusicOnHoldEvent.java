@@ -35,6 +35,8 @@ public class MusicOnHoldEvent extends ManagerEvent
     private String className;
     private String uniqueId;
     private String state;
+		private String linkedId;
+		private String language;
     
 	public MusicOnHoldEvent(Object source)
     {
@@ -130,4 +132,32 @@ public class MusicOnHoldEvent extends ManagerEvent
     {
         return STATE_STOP.equals(state);
     }
+
+	/**
+	 * @return the linkedId
+	 */
+	public String getLinkedId() {
+		return linkedId;
+	}
+
+	/**
+	 * @param linkedId the linkedId to set
+	 */
+	public void setLinkedId(String linkedId) {
+		this.linkedId = linkedId;
+	}
+
+	/**
+	 * @return the language
+	 */
+	public String getLanguage() {
+		return language;
+	}
+
+	/**
+	 * @param language the language to set
+	 */
+	public void setLanguage(String language) {
+		this.language = language;
+	}
 }

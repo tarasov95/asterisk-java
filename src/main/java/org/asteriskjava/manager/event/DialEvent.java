@@ -89,6 +89,8 @@ public class DialEvent extends ManagerEvent
 
     private String dialString;
     private String dialStatus;
+		private String destlinkedid;
+		private String linkedid;
 
     public DialEvent(Object source)
     {
@@ -481,4 +483,32 @@ public class DialEvent extends ManagerEvent
     {
         this.destCallerIdNum = destCallerIdNum;
     }
+
+	/**
+	 * @return the destlinkedid
+	 */
+	public String getDestlinkedid() {
+		return destlinkedid;
+	}
+
+	/**
+	 * @param destlinkedid the destlinkedid to set
+	 */
+	public void setDestlinkedid(String destlinkedid) {
+		this.destlinkedid = destlinkedid;
+	}
+
+	/**
+	 * @return the linkedid
+	 */
+	public String getLinkedid() {
+		return linkedid;
+	}
+
+	/**
+	 * @param linkedid the linkedid to set
+	 */
+	public void setLinkedid(String linkedid) {
+		this.linkedid = linkedid;
+	}
 }

@@ -12,6 +12,7 @@ public class NewConnectedLineEvent extends ManagerEvent
 	private String channel;
 	private String uniqueId;
 	private String language;
+	private String linkedid;
 
 	public NewConnectedLineEvent(Object source)
 	{
@@ -46,5 +47,19 @@ public class NewConnectedLineEvent extends ManagerEvent
 	public void setUniqueId(String uniqueId)
 	{
 		this.uniqueId = uniqueId;
+	}
+
+	/**
+	 * @return the linkedid
+	 */
+	public String getLinkedid() {
+		return linkedid;
+	}
+
+	/**
+	 * @param linkedid the linkedid to set
+	 */
+	public void setLinkedid(String linkedid) {
+		this.linkedid = linkedid;
 	}
 }

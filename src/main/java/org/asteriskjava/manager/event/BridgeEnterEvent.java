@@ -12,6 +12,7 @@ public class BridgeEnterEvent extends AbstractBridgeEvent
 	private String uniqueId;
 	private String channel;
 	private String language;
+	private String swapuniqueid;
 
 	public BridgeEnterEvent(Object source)
 	{
@@ -46,5 +47,19 @@ public class BridgeEnterEvent extends AbstractBridgeEvent
 	public void setUniqueId(String uniqueId)
 	{
 		this.uniqueId = uniqueId;
+	}
+
+	/**
+	 * @return the swapuniqueid
+	 */
+	public String getSwapuniqueid() {
+		return swapuniqueid;
+	}
+
+	/**
+	 * @param swapuniqueid the swapuniqueid to set
+	 */
+	public void setSwapuniqueid(String swapuniqueid) {
+		this.swapuniqueid = swapuniqueid;
 	}
 }

@@ -20,6 +20,7 @@ public class AttendedTransferEvent extends AbstractBridgeEvent {
     private String    origTransfererExten;
     private String    origTransfererPriority;
     private String    origTransfererUniqueid;
+    private String    origTransfererLinkedid;
     private String    origBridgeUniqueid;
     private String    origBridgeType;
     private String    origBridgeTechnology;
@@ -38,6 +39,7 @@ public class AttendedTransferEvent extends AbstractBridgeEvent {
     private String    secondTransfererExten;
     private String    secondTransfererPriority;
     private String    secondTransfererUniqueid;
+    private String    secondTransfererLinkedid;
     private String    secondBridgeUniqueid;
     private String    secondBridgeType;
     private String    secondBridgeTechnology;
@@ -59,6 +61,7 @@ public class AttendedTransferEvent extends AbstractBridgeEvent {
     private String    localOneExten;
     private String    localOnePriority;
     private String    localOneUniqueid;
+    private String    localOneLinkedid;
     private String    localTwoChannel;
     private String    localTwoChannelState;
     private String    localTwoChannelStateDesc;
@@ -71,6 +74,7 @@ public class AttendedTransferEvent extends AbstractBridgeEvent {
     private String    localTwoExten;
     private String    localTwoPriority;
     private String    localTwoUniqueid;
+    private String    localTwoLinkedid;
     private String    destTransfererChannel;
     private String    transfereeChannel;
     private String    transfereeChannelState;
@@ -84,6 +88,24 @@ public class AttendedTransferEvent extends AbstractBridgeEvent {
     private String    transfereeExten;
     private String    transfereePriority;
     private String    transfereeUniqueid;
+    private String    transfereeLinkedid;
+    private String    isexternal;
+    private String    transfertargetconnectedlinename;
+    private String    transfertargetcalleridname;
+    private String    transfertargetcalleridnum;
+    private String    transfereelanguage;
+    private String    transfertargetpriority;
+    private String    transfertargetuniqueid;
+    private String    transfertargetconnectedlinenum;
+    private String    transfertargetcontext;
+    private String    secondtransfererlanguage;
+    private String    transfertargetchannel;
+    private String    transfertargetchannelstate;
+    private String    transfertargetchannelstatedesc;
+    private String    origtransfererlanguage;
+    private String    transfertargetlanguage;
+    private String    transfertargetlinkedid;
+		private String    result;
 
     public AttendedTransferEvent(Object source)
     {
@@ -847,4 +869,312 @@ public class AttendedTransferEvent extends AbstractBridgeEvent {
     {
         this.transfereeUniqueid = transfereeUniqueid;
     }
+
+	/**
+	 * @return the origTransfererLinkedid
+	 */
+	public String getOrigTransfererLinkedid() {
+		return origTransfererLinkedid;
+	}
+
+	/**
+	 * @param origTransfererLinkedid the origTransfererLinkedid to set
+	 */
+	public void setOrigTransfererLinkedid(String origTransfererLinkedid) {
+		this.origTransfererLinkedid = origTransfererLinkedid;
+	}
+
+	/**
+	 * @return the secondTransfererLinkedid
+	 */
+	public String getSecondTransfererLinkedid() {
+		return secondTransfererLinkedid;
+	}
+
+	/**
+	 * @param secondTransfererLinkedid the secondTransfererLinkedid to set
+	 */
+	public void setSecondTransfererLinkedid(String secondTransfererLinkedid) {
+		this.secondTransfererLinkedid = secondTransfererLinkedid;
+	}
+
+	/**
+	 * @return the localOneLinkedid
+	 */
+	public String getLocalOneLinkedid() {
+		return localOneLinkedid;
+	}
+
+	/**
+	 * @param localOneLinkedid the localOneLinkedid to set
+	 */
+	public void setLocalOneLinkedid(String localOneLinkedid) {
+		this.localOneLinkedid = localOneLinkedid;
+	}
+
+	/**
+	 * @return the localTwoLinkedid
+	 */
+	public String getLocalTwoLinkedid() {
+		return localTwoLinkedid;
+	}
+
+	/**
+	 * @param localTwoLinkedid the localTwoLinkedid to set
+	 */
+	public void setLocalTwoLinkedid(String localTwoLinkedid) {
+		this.localTwoLinkedid = localTwoLinkedid;
+	}
+
+	/**
+	 * @return the transfereeLinkedid
+	 */
+	public String getTransfereeLinkedid() {
+		return transfereeLinkedid;
+	}
+
+	/**
+	 * @param transfereeLinkedid the transfereeLinkedid to set
+	 */
+	public void setTransfereeLinkedid(String transfereeLinkedid) {
+		this.transfereeLinkedid = transfereeLinkedid;
+	}
+
+	/**
+	 * @return the isexternal
+	 */
+	public String getIsexternal() {
+		return isexternal;
+	}
+
+	/**
+	 * @param isexternal the isexternal to set
+	 */
+	public void setIsexternal(String isexternal) {
+		this.isexternal = isexternal;
+	}
+
+	/**
+	 * @return the transfertargetconnectedlinename
+	 */
+	public String getTransfertargetconnectedlinename() {
+		return transfertargetconnectedlinename;
+	}
+
+	/**
+	 * @param transfertargetconnectedlinename the transfertargetconnectedlinename to set
+	 */
+	public void setTransfertargetconnectedlinename(String transfertargetconnectedlinename) {
+		this.transfertargetconnectedlinename = transfertargetconnectedlinename;
+	}
+
+	/**
+	 * @return the transfertargetcalleridname
+	 */
+	public String getTransfertargetcalleridname() {
+		return transfertargetcalleridname;
+	}
+
+	/**
+	 * @param transfertargetcalleridname the transfertargetcalleridname to set
+	 */
+	public void setTransfertargetcalleridname(String transfertargetcalleridname) {
+		this.transfertargetcalleridname = transfertargetcalleridname;
+	}
+
+	/**
+	 * @return the transfertargetcalleridnum
+	 */
+	public String getTransfertargetcalleridnum() {
+		return transfertargetcalleridnum;
+	}
+
+	/**
+	 * @param transfertargetcalleridnum the transfertargetcalleridnum to set
+	 */
+	public void setTransfertargetcalleridnum(String transfertargetcalleridnum) {
+		this.transfertargetcalleridnum = transfertargetcalleridnum;
+	}
+
+	/**
+	 * @return the transfereelanguage
+	 */
+	public String getTransfereelanguage() {
+		return transfereelanguage;
+	}
+
+	/**
+	 * @param transfereelanguage the transfereelanguage to set
+	 */
+	public void setTransfereelanguage(String transfereelanguage) {
+		this.transfereelanguage = transfereelanguage;
+	}
+
+	/**
+	 * @return the transfertargetpriority
+	 */
+	public String getTransfertargetpriority() {
+		return transfertargetpriority;
+	}
+
+	/**
+	 * @param transfertargetpriority the transfertargetpriority to set
+	 */
+	public void setTransfertargetpriority(String transfertargetpriority) {
+		this.transfertargetpriority = transfertargetpriority;
+	}
+
+	/**
+	 * @return the transfertargetuniqueid
+	 */
+	public String getTransfertargetuniqueid() {
+		return transfertargetuniqueid;
+	}
+
+	/**
+	 * @param transfertargetuniqueid the transfertargetuniqueid to set
+	 */
+	public void setTransfertargetuniqueid(String transfertargetuniqueid) {
+		this.transfertargetuniqueid = transfertargetuniqueid;
+	}
+
+	/**
+	 * @return the transfertargetconnectedlinenum
+	 */
+	public String getTransfertargetconnectedlinenum() {
+		return transfertargetconnectedlinenum;
+	}
+
+	/**
+	 * @param transfertargetconnectedlinenum the transfertargetconnectedlinenum to set
+	 */
+	public void setTransfertargetconnectedlinenum(String transfertargetconnectedlinenum) {
+		this.transfertargetconnectedlinenum = transfertargetconnectedlinenum;
+	}
+
+	/**
+	 * @return the transfertargetcontext
+	 */
+	public String getTransfertargetcontext() {
+		return transfertargetcontext;
+	}
+
+	/**
+	 * @param transfertargetcontext the transfertargetcontext to set
+	 */
+	public void setTransfertargetcontext(String transfertargetcontext) {
+		this.transfertargetcontext = transfertargetcontext;
+	}
+
+	/**
+	 * @return the secondtransfererlanguage
+	 */
+	public String getSecondtransfererlanguage() {
+		return secondtransfererlanguage;
+	}
+
+	/**
+	 * @param secondtransfererlanguage the secondtransfererlanguage to set
+	 */
+	public void setSecondtransfererlanguage(String secondtransfererlanguage) {
+		this.secondtransfererlanguage = secondtransfererlanguage;
+	}
+
+	/**
+	 * @return the transfertargetchannel
+	 */
+	public String getTransfertargetchannel() {
+		return transfertargetchannel;
+	}
+
+	/**
+	 * @param transfertargetchannel the transfertargetchannel to set
+	 */
+	public void setTransfertargetchannel(String transfertargetchannel) {
+		this.transfertargetchannel = transfertargetchannel;
+	}
+
+	/**
+	 * @return the transfertargetchannelstate
+	 */
+	public String getTransfertargetchannelstate() {
+		return transfertargetchannelstate;
+	}
+
+	/**
+	 * @param transfertargetchannelstate the transfertargetchannelstate to set
+	 */
+	public void setTransfertargetchannelstate(String transfertargetchannelstate) {
+		this.transfertargetchannelstate = transfertargetchannelstate;
+	}
+
+	/**
+	 * @return the transfertargetchannelstatedesc
+	 */
+	public String getTransfertargetchannelstatedesc() {
+		return transfertargetchannelstatedesc;
+	}
+
+	/**
+	 * @param transfertargetchannelstatedesc the transfertargetchannelstatedesc to set
+	 */
+	public void setTransfertargetchannelstatedesc(String transfertargetchannelstatedesc) {
+		this.transfertargetchannelstatedesc = transfertargetchannelstatedesc;
+	}
+
+	/**
+	 * @return the origtransfererlanguage
+	 */
+	public String getOrigtransfererlanguage() {
+		return origtransfererlanguage;
+	}
+
+	/**
+	 * @param origtransfererlanguage the origtransfererlanguage to set
+	 */
+	public void setOrigtransfererlanguage(String origtransfererlanguage) {
+		this.origtransfererlanguage = origtransfererlanguage;
+	}
+
+	/**
+	 * @return the transfertargetlanguage
+	 */
+	public String getTransfertargetlanguage() {
+		return transfertargetlanguage;
+	}
+
+	/**
+	 * @param transfertargetlanguage the transfertargetlanguage to set
+	 */
+	public void setTransfertargetlanguage(String transfertargetlanguage) {
+		this.transfertargetlanguage = transfertargetlanguage;
+	}
+
+	/**
+	 * @return the transfertargetlinkedid
+	 */
+	public String getTransfertargetlinkedid() {
+		return transfertargetlinkedid;
+	}
+
+	/**
+	 * @param transfertargetlinkedid the transfertargetlinkedid to set
+	 */
+	public void setTransfertargetlinkedid(String transfertargetlinkedid) {
+		this.transfertargetlinkedid = transfertargetlinkedid;
+	}
+
+	/**
+	 * @return the result
+	 */
+	public String getResult() {
+		return result;
+	}
+
+	/**
+	 * @param result the result to set
+	 */
+	public void setResult(String result) {
+		this.result = result;
+	}
 }

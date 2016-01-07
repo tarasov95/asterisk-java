@@ -15,6 +15,7 @@ public abstract class AbstractBridgeEvent extends ManagerEvent
 	private String bridgeCreator;
 	private String bridgeName;
 	private String bridgeTechnology;
+	private String linkedid;
 
 	AbstractBridgeEvent(Object source)
 	{
@@ -79,5 +80,19 @@ public abstract class AbstractBridgeEvent extends ManagerEvent
 	public void setBridgeTechnology(String bridgeTechnology)
 	{
 		this.bridgeTechnology = bridgeTechnology;
+	}
+
+	/**
+	 * @return the linkedid
+	 */
+	public String getLinkedid() {
+		return linkedid;
+	}
+
+	/**
+	 * @param linkedid the linkedid to set
+	 */
+	public void setLinkedid(String linkedid) {
+		this.linkedid = linkedid;
 	}
 }

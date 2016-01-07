@@ -38,6 +38,7 @@ public abstract class AbstractChannelEvent extends ManagerEvent
      * The unique id of the channel.
      */
     private String uniqueId;
+		private String linkedid;
 
     protected AbstractChannelEvent(Object source)
     {
@@ -99,5 +100,19 @@ public abstract class AbstractChannelEvent extends ManagerEvent
     {
         setCallerIdNum(callerId);
     }
+
+	/**
+	 * @return the linkedid
+	 */
+	public String getLinkedid() {
+		return linkedid;
+	}
+
+	/**
+	 * @param linkedid the linkedid to set
+	 */
+	public void setLinkedid(String linkedid) {
+		this.linkedid = linkedid;
+	}
 
 }

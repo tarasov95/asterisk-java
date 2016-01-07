@@ -36,6 +36,7 @@ public class NewExtenEvent extends ManagerEvent
     private String appData;
     private String channel;
     private String language;
+		private String linkedid;
 
     /**
      * @param source
@@ -135,4 +136,18 @@ public class NewExtenEvent extends ManagerEvent
     {
         this.extension = extension;
     }
+
+	/**
+	 * @return the linkedid
+	 */
+	public String getLinkedid() {
+		return linkedid;
+	}
+
+	/**
+	 * @param linkedid the linkedid to set
+	 */
+	public void setLinkedid(String linkedid) {
+		this.linkedid = linkedid;
+	}
 }

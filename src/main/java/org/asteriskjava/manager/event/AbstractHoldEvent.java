@@ -38,6 +38,9 @@ public class AbstractHoldEvent extends ManagerEvent
     private String uniqueId;
 
     private Boolean status;
+		
+		private String language;
+		private String linkedid;
 
     /**
      * Creates a new HoldEvent.
@@ -166,4 +169,32 @@ public class AbstractHoldEvent extends ManagerEvent
     {
         this.accountCode = accountCode;
     }
+
+	/**
+	 * @return the language
+	 */
+	public String getLanguage() {
+		return language;
+	}
+
+	/**
+	 * @param language the language to set
+	 */
+	public void setLanguage(String language) {
+		this.language = language;
+	}
+
+	/**
+	 * @return the linkedid
+	 */
+	public String getLinkedid() {
+		return linkedid;
+	}
+
+	/**
+	 * @param linkedid the linkedid to set
+	 */
+	public void setLinkedid(String linkedid) {
+		this.linkedid = linkedid;
+	}
 }
