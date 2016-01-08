@@ -42,6 +42,179 @@ public class RtcpReceivedEvent extends AbstractRtcpEvent
     public static final int PT_RECEIVER_REPORT = 201;
     public static final int PT_H261_FUR = 192;
 
+//RtcpReceivedEvent
+    private String to;
+    private String ssrc;
+    private String report0lsr;
+    private String report0cumulativelost;
+    private String reportcount;
+    private String sentpackets;
+    private String language;
+    private String report0highestsequence;
+    private String report0dlsr;
+    private String report0fractionlost;
+    private String report0sequencenumbercycles;
+    private String sentntp;
+    private String sentrtp;
+    private String report0sourcessrc;
+    private String sentoctets;
+    private String linkedid;
+    private String uniqueid;
+    private String channel;
+    private String report0iajitter;
+
+    public void setTo(String to) {
+        this.to=to;
+    }
+
+    public String getTo() {
+        return this.to;
+    }
+
+    public void setSsrc(String ssrc) {
+        this.ssrc=ssrc;
+    }
+
+    public String getSsrc() {
+        return this.ssrc;
+    }
+
+    public void setReport0lsr(String report0lsr) {
+        this.report0lsr=report0lsr;
+    }
+
+    public String getReport0lsr() {
+        return this.report0lsr;
+    }
+
+    public void setReport0cumulativelost(String report0cumulativelost) {
+        this.report0cumulativelost=report0cumulativelost;
+    }
+
+    public String getReport0cumulativelost() {
+        return this.report0cumulativelost;
+    }
+
+    public void setReportcount(String reportcount) {
+        this.reportcount=reportcount;
+    }
+
+    public String getReportcount() {
+        return this.reportcount;
+    }
+
+    public void setSentpackets(String sentpackets) {
+        this.sentpackets=sentpackets;
+    }
+
+    public String getSentpackets() {
+        return this.sentpackets;
+    }
+
+    public void setLanguage(String language) {
+        this.language=language;
+    }
+
+    public String getLanguage() {
+        return this.language;
+    }
+
+    public void setReport0highestsequence(String report0highestsequence) {
+        this.report0highestsequence=report0highestsequence;
+    }
+
+    public String getReport0highestsequence() {
+        return this.report0highestsequence;
+    }
+
+    public void setReport0dlsr(String report0dlsr) {
+        this.report0dlsr=report0dlsr;
+    }
+
+    public String getReport0dlsr() {
+        return this.report0dlsr;
+    }
+
+    public void setReport0fractionlost(String report0fractionlost) {
+        this.report0fractionlost=report0fractionlost;
+    }
+
+    public String getReport0fractionlost() {
+        return this.report0fractionlost;
+    }
+
+    public void setReport0sequencenumbercycles(String report0sequencenumbercycles) {
+        this.report0sequencenumbercycles=report0sequencenumbercycles;
+    }
+
+    public String getReport0sequencenumbercycles() {
+        return this.report0sequencenumbercycles;
+    }
+
+    public void setSentntp(String sentntp) {
+        this.sentntp=sentntp;
+    }
+
+    public String getSentntp() {
+        return this.sentntp;
+    }
+
+    public void setSentrtp(String sentrtp) {
+        this.sentrtp=sentrtp;
+    }
+
+    public String getSentrtp() {
+        return this.sentrtp;
+    }
+
+    public void setReport0sourcessrc(String report0sourcessrc) {
+        this.report0sourcessrc=report0sourcessrc;
+    }
+
+    public String getReport0sourcessrc() {
+        return this.report0sourcessrc;
+    }
+
+    public void setSentoctets(String sentoctets) {
+        this.sentoctets=sentoctets;
+    }
+
+    public String getSentoctets() {
+        return this.sentoctets;
+    }
+
+    public void setLinkedid(String linkedid) {
+        this.linkedid=linkedid;
+    }
+
+    public String getLinkedid() {
+        return this.linkedid;
+    }
+
+    public void setUniqueid(String uniqueid) {
+        this.uniqueid=uniqueid;
+    }
+
+    public String getUniqueid() {
+        return this.uniqueid;
+    }
+
+    public void setChannel(String channel) {
+        this.channel=channel;
+    }
+
+    public String getChannel() {
+        return this.channel;
+    }
+
+    public void setReport0iajitter(String report0iajitter) {
+        this.report0iajitter=report0iajitter;
+    }
+
+    public String getReport0iajitter() {
+        return this.report0iajitter;
+    }
+		
     private InetAddress fromAddress;
     private Integer fromPort;
     private Long pt;

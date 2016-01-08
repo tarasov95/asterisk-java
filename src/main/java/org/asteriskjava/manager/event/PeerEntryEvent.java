@@ -33,6 +33,35 @@ public class PeerEntryEvent extends ResponseEvent
      */
     private static final long serialVersionUID = 0L;
 
+//PeerEntryEvent
+    private String autocomedia;
+    private String autoforcerport;
+    private String comedia;
+
+    public void setAutocomedia(String autocomedia) {
+        this.autocomedia=autocomedia;
+    }
+
+    public String getAutocomedia() {
+        return this.autocomedia;
+    }
+
+    public void setAutoforcerport(String autoforcerport) {
+        this.autoforcerport=autoforcerport;
+    }
+
+    public String getAutoforcerport() {
+        return this.autoforcerport;
+    }
+
+    public void setComedia(String comedia) {
+        this.comedia=comedia;
+    }
+
+    public String getComedia() {
+        return this.comedia;
+    }
+		
     public static final String CHANNEL_TYPE_SIP = "SIP";
     public static final String CHANNEL_TYPE_IAX = "IAX";
 

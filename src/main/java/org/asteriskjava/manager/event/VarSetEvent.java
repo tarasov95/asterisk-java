@@ -32,6 +32,17 @@ public class VarSetEvent extends ManagerEvent
 {
     static final long serialVersionUID = 1L;
 
+//VarSetEvent
+    private String linkedid;
+
+    public void setLinkedid(String linkedid) {
+        this.linkedid=linkedid;
+    }
+
+    public String getLinkedid() {
+        return this.linkedid;
+    }
+		
     private String channel;
     private String uniqueId;
     private String variable;

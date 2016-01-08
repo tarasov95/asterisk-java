@@ -1,5 +1,5 @@
 //extract missing fileds & classes from the log, for example:
-//cscript /Nologo extractMissingFields.js /log:"/r/proj/fs/aster/master/agi/agi-agent/log/agi.log"
+//cscript /Nologo extractMissingFieldsFromLog.js /log:"/r/proj/fs/aster/master/agi/agi-agent/log/agi.log"
 function GetFileStream(sPath) {
 	var oFso = new ActiveXObject("Scripting.FileSystemObject");
 	return oFso.OpenTextFile(sPath, 1, false, -2);
@@ -9,13 +9,27 @@ function echo(s) {
 	WScript.Echo(s);
 }
 
+function capitalFirst(s) {
+	return s.charAt(0).toUpperCase()+s.substr(1);
+}
+
 function reportMissing(mapClassField) {
 	for (var sClass in mapClassField) {
 		echo("//"+sClass);
 		for (var sField in mapClassField[sClass]) {
 			if (!(/^(event)$/i).test(sField)) {
-				echo("    private String    "+sField+";");
+				echo("    private String "+sField+";");
 			}
+		}
+		for (var sField in mapClassField[sClass]) {
+			echo("");
+			echo("    public void set"+capitalFirst(sField)+"(String "+sField+") {");
+			echo("        this."+sField+"="+sField+";");
+			echo("    }");
+			echo("");
+			echo("    public String get"+capitalFirst(sField)+"() {");
+			echo("        return this."+sField+";");
+			echo("    }");
 		}
 	}
 }
