@@ -151,6 +151,7 @@ public class ManagerReaderImpl implements ManagerReader
             {
                 // maybe we will find a better way to identify the protocol identifier but for now
                 // this works quite well.
+                //logger.debug("readLine: ".concat(line));
                 if (line.startsWith("Asterisk Call Manager/") ||
                         line.startsWith("Asterisk Call Manager Proxy/") ||
                         line.startsWith("Asterisk Manager Proxy/") ||

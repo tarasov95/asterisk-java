@@ -638,23 +638,23 @@ public class ManagerConnectionImpl implements ManagerConnection, Dispatcher
             final List<String> showVersionFilesResult;
 
             // increase timeout as output is quite large
-            showVersionFilesResponse = sendAction(new CommandAction("show version files pbx.c"), defaultResponseTimeout * 2);
-            if (!(showVersionFilesResponse instanceof CommandResponse))
-            {
-                // return early in case of permission problems
-                // org.asteriskjava.manager.response.ManagerError:
-                // actionId='null'; message='Permission denied';
-                // response='Error';
-                // uniqueId='null'; systemHashcode=15231583
-                break;
-            }
+            showVersionFilesResponse = null; //sendAction(new CommandAction("show version files pbx.c"), defaultResponseTimeout * 2);
+//            if (!(showVersionFilesResponse instanceof CommandResponse))
+//            {
+//                // return early in case of permission problems
+//                // org.asteriskjava.manager.response.ManagerError:
+//                // actionId='null'; message='Permission denied';
+//                // response='Error';
+//                // uniqueId='null'; systemHashcode=15231583
+//                break;
+//            }
 
-            showVersionFilesResult = ((CommandResponse) showVersionFilesResponse).getResult();
-            if (showVersionFilesResult != null && showVersionFilesResult.size() > 0)
+            showVersionFilesResult = null;//((CommandResponse) showVersionFilesResponse).getResult();
+            if (true/*showVersionFilesResult != null && showVersionFilesResult.size() > 0*/)
             {
-                final String line1 = showVersionFilesResult.get(0);
+                final String line1 = null;//showVersionFilesResult.get(0);
 
-                if (line1 != null && line1.startsWith("File"))
+                if (false/*line1 != null && line1.startsWith("File")*/)
                 {
                     final String rawVersion;
 
@@ -665,7 +665,7 @@ public class ManagerConnectionImpl implements ManagerConnection, Dispatcher
                     }
                     return AsteriskVersion.ASTERISK_1_2;
                 }
-                else if (line1 != null && line1.contains("No such command"))
+                else if (true /*line1 != null && line1.contains("No such command")*/)
                 {
 
                     final ManagerResponse coreShowVersionResponse = sendAction(new CommandAction("core show version"),
@@ -1039,7 +1039,7 @@ public class ManagerConnectionImpl implements ManagerConnection, Dispatcher
                     }
                     catch (InterruptedException e)
                     {
-                        logger.warn("Interrupted while waiting for response events.");
+                        logger.warn(String.format("Interrupted while waiting for response events (%dms).", timeout));
                         Thread.currentThread().interrupt();
                     }
                 }
@@ -1216,7 +1216,7 @@ public class ManagerConnectionImpl implements ManagerConnection, Dispatcher
             return;
         }
         dispatchLegacyEventIfNeeded(event);
-        logger.debug("Dispatching event:\n" + event.toString());
+        //logger.debug("Dispatching event:\n" + event.toString());
 
         // Some events need special treatment besides forwarding them to the
         // registered eventListeners (clients)
