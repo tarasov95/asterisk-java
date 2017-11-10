@@ -21,6 +21,7 @@ import org.asteriskjava.manager.event.*;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Modifier;
 import java.util.*;
+import org.asteriskjava.manager.event.SIPpeerstatusCompleteEvent;
 
 /**
  * Default implementation of the EventBuilder interface.
@@ -160,6 +161,7 @@ class EventBuilderImpl extends AbstractBuilder implements EventBuilder
         registerEventClass(PausedEvent.class);
         registerEventClass(PeerEntryEvent.class);
         registerEventClass(PeerlistCompleteEvent.class);
+        registerEventClass(SIPpeerstatusCompleteEvent.class);
         registerEventClass(PeersEvent.class);
         registerEventClass(PeerStatusEvent.class);
         registerEventClass(PickupEvent.class);

@@ -25,7 +25,7 @@ package org.asteriskjava.manager.event;
  * @author srt
  * @version $Id$
  */
-public class PeerStatusEvent extends ManagerEvent
+public class PeerStatusEvent extends ResponseEvent
 {
     /**
      * Serializable version identifier.
