@@ -33,8 +33,10 @@ public class ParkAction extends AbstractManagerAction
     private static final long serialVersionUID = -2930397629192323391L;
 
     private String channel;
-    private String channel2;
+    private String timeoutChannel;
     private Integer timeout;
+    private String announceChannel;
+    private String parkinglot;
 
     /**
      * Creates a new empty ParkAction.
@@ -48,29 +50,29 @@ public class ParkAction extends AbstractManagerAction
      * Creates a new ParkAction.
      * 
      * @param channel name of the channel to park.
-     * @param channel2 name of the channel to announce park info to and return
+     * @param timeoutChannel name of the channel to announce park info to and return
      *            to on timeout.
      */
-    public ParkAction(String channel, String channel2)
+    public ParkAction(String channel, String timeoutChannel)
     {
         super();
         this.channel = channel;
-        this.channel2 = channel2;
+        this.timeoutChannel = timeoutChannel;
     }
 
     /**
      * Creates a new ParkAction with a timeout.
      * 
      * @param channel the name of the channel to park.
-     * @param channel2 the name of the channel to announce park info to and
+     * @param timeoutChannel the name of the channel to announce park info to and
      *            return to on timeout.
      * @param timeout the timeout in seconds before callback.
      */
-    public ParkAction(String channel, String channel2, Integer timeout)
+    public ParkAction(String channel, String timeoutChannel, Integer timeout)
     {
         super();
         this.channel = channel;
-        this.channel2 = channel2;
+        this.timeoutChannel = timeoutChannel;
         this.timeout = timeout;
     }
 
@@ -111,9 +113,9 @@ public class ParkAction extends AbstractManagerAction
      * @return the name of the channel to announce park info to and return to on
      *         timeout.
      */
-    public String getChannel2()
+    public String getTimeoutChannel()
     {
-        return channel2;
+        return timeoutChannel;
     }
 
     /**
@@ -121,12 +123,12 @@ public class ParkAction extends AbstractManagerAction
      * timeout.<p>
      * This property is mandatory.
      * 
-     * @param channel2 the name of the channel to announce park info to and
+     * @param timeoutChannel the name of the channel to announce park info to and
      *            return to on timeout.
      */
-    public void setChannel2(String channel2)
+    public void setTimeoutChannel(String timeoutChannel)
     {
-        this.channel2 = channel2;
+        this.timeoutChannel = timeoutChannel;
     }
 
     /**
@@ -148,4 +150,32 @@ public class ParkAction extends AbstractManagerAction
     {
         this.timeout = timeout;
     }
+
+  /**
+   * @return the announceChannel
+   */
+  public String getAnnounceChannel() {
+    return announceChannel;
+  }
+
+  /**
+   * @param announceChannel the announceChannel to set
+   */
+  public void setAnnounceChannel(String announceChannel) {
+    this.announceChannel = announceChannel;
+  }
+
+  /**
+   * @return the parkinglot
+   */
+  public String getParkinglot() {
+    return parkinglot;
+  }
+
+  /**
+   * @param parkinglot the parkinglot to set
+   */
+  public void setParkinglot(String parkinglot) {
+    this.parkinglot = parkinglot;
+  }
 }

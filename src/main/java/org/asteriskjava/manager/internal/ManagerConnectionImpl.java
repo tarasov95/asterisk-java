@@ -64,6 +64,7 @@ import org.asteriskjava.util.LogFactory;
 import org.asteriskjava.util.SocketConnectionFacade;
 import org.asteriskjava.util.internal.SocketConnectionFacadeImpl;
 import org.asteriskjava.manager.action.UserEventAction;
+import org.asteriskjava.manager.event.IResponseEvent;
 
 /**
  * Internal implemention of the ManagerConnection interface.
@@ -1035,11 +1036,17 @@ public class ManagerConnectionImpl implements ManagerConnection, Dispatcher
                 {
                     try
                     {
+                        logger.debug(String.format("wait for responseEvents(%s) for %dms.", internalActionId, timeout));
                         responseEvents.wait(timeout);
                     }
                     catch (InterruptedException e)
                     {
-                        logger.warn(String.format("Interrupted while waiting for response events (%dms).", timeout));
+                        logger.warn(String.format(">>>>>>Interrupted while waiting for response events(%s) (%dms).", internalActionId, timeout));
+                        for(Throwable th=e; th!=null; th=th.getCause()) {
+                          logger.warn(th.toString());
+                          StackTraceElement[] ar=th.getStackTrace();
+                          for (StackTraceElement el: ar) logger.warn(el.toString());
+                        }
                         Thread.currentThread().interrupt();
                     }
                 }
@@ -1223,12 +1230,14 @@ public class ManagerConnectionImpl implements ManagerConnection, Dispatcher
         // These events are handled here at first:
 
         // Dispatch ResponseEvents to the appropriate responseEventListener
-        if (event instanceof ResponseEvent)
+        if (event instanceof ResponseEvent || event instanceof IResponseEvent)
         {
             ResponseEvent responseEvent;
             String internalActionId;
 
-            responseEvent = (ResponseEvent) event;
+            responseEvent = (event instanceof IResponseEvent)? 
+                    ((IResponseEvent)event).toResponseEvent(event):
+                    (ResponseEvent) event;
             internalActionId = responseEvent.getInternalActionId();
             if (internalActionId != null)
             {
@@ -1241,7 +1250,7 @@ public class ManagerConnectionImpl implements ManagerConnection, Dispatcher
                     {
                         try
                         {
-                            listener.onManagerEvent(event);
+                            listener.onManagerEvent(responseEvent);
                         }
                         catch (Exception e)
                         {

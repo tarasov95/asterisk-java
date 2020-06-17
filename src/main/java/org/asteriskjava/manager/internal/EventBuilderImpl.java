@@ -435,6 +435,14 @@ class EventBuilderImpl extends AbstractBuilder implements EventBuilder
                 responseEvent.setActionId(ManagerUtil.stripInternalActionId(actionId));
                 responseEvent.setInternalActionId(ManagerUtil.getInternalActionId(actionId));
             }
+        } else if(event instanceof IResponseEvent) {
+            IResponseEvent responseEvent = (IResponseEvent) event;
+            String actionId = responseEvent.getActionId();
+            if (actionId != null)
+            {
+                responseEvent.setActionId(ManagerUtil.stripInternalActionId(actionId));
+                responseEvent.setInternalActionId(ManagerUtil.getInternalActionId(actionId));
+            }
         }
 
         return event;

@@ -26,7 +26,7 @@ package org.asteriskjava.manager.event;
  * @author srt
  * @version $Id$
  */
-public class ParkedCallEvent extends AbstractParkedCallEvent
+public class ParkedCallEvent extends AbstractParkedCallEvent implements IResponseEvent 
 {
     /**
      * Serializable version identifier
@@ -70,4 +70,40 @@ public class ParkedCallEvent extends AbstractParkedCallEvent
     {
         setUniqueId(unqiueId);
     }
+
+//////////////////////////////////IResponseEvent//////////////////////////////    
+    @Override
+    public ResponseEvent toResponseEvent(ManagerEvent ev) {
+      if(!(ev instanceof ParkedCallEvent)) {
+        throw new IllegalArgumentException("The event parameter must be of ParkedCallEvent class.");
+      }
+      return new ParkedCallResponseEvent((ParkedCallEvent)ev);
+    }
+    private String actionId;
+    private String internalActionId;
+
+    @Override
+    public final String getActionId()
+    {
+        return actionId;
+    }
+
+    @Override
+    public final void setActionId(String actionId)
+    {
+        this.actionId = actionId;
+    }
+
+    @Override
+    public final String getInternalActionId()
+    {
+        return internalActionId;
+    }
+
+    @Override
+    public final void setInternalActionId(String internalActionId)
+    {
+        this.internalActionId = internalActionId;
+    }
+
 }

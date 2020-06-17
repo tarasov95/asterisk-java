@@ -37,15 +37,31 @@ public class ParkedCallsAction extends AbstractManagerAction
      * Serializable version identifier
      */
     private static final long serialVersionUID = 1859575016378824743L;
+    private String parkingLot;
 
     /**
      * Creates a new ParkedCallsAction.
      */
-    public ParkedCallsAction()
+    public ParkedCallsAction(String parkingLot)
     {
-
+      super();
+      this.parkingLot = parkingLot;
+    }
+    
+    public ParkedCallsAction() {
+      this("");
     }
 
+    public String getParkingLot()
+    {
+        return parkingLot;
+    }
+
+    public void setParkingLot(String parkingLot)
+    {
+        this.parkingLot = parkingLot;
+    }    
+    
     /**
      * Returns the name of this action, i.e. "ParkedCalls".
      */
