@@ -51,6 +51,8 @@ public class StatusEvent extends ResponseEvent
     private String pickupGroup;
     private String timeToHangup;
     private Map<String, String> variables;
+    private String readtrans;
+    private String writetrans;
 
     public StatusEvent(Object source)
     {
@@ -440,4 +442,32 @@ public class StatusEvent extends ResponseEvent
     {
         this.timeToHangup = timeToHangup;
     }
+
+  /**
+   * @return the readtrans
+   */
+  public String getReadtrans() {
+    return readtrans;
+  }
+
+  /**
+   * @param readtrans the readtrans to set
+   */
+  public void setReadtrans(String readtrans) {
+    this.readtrans = readtrans;
+  }
+
+  /**
+   * @return the writetrans
+   */
+  public String getWritetrans() {
+    return writetrans;
+  }
+
+  /**
+   * @param writetrans the writetrans to set
+   */
+  public void setWritetrans(String writetrans) {
+    this.writetrans = writetrans;
+  }
 }
