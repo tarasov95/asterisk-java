@@ -53,6 +53,7 @@ public class StatusEvent extends ResponseEvent
     private Map<String, String> variables;
     private String readtrans;
     private String writetrans;
+    private String bridgeId;
 
     public StatusEvent(Object source)
     {
@@ -469,5 +470,19 @@ public class StatusEvent extends ResponseEvent
    */
   public void setWritetrans(String writetrans) {
     this.writetrans = writetrans;
+  }
+
+  /**
+   * @return the bridgeId
+   */
+  public String getBridgeId() {
+    return bridgeId;
+  }
+
+  /**
+   * @param bridgeId the bridgeId to set
+   */
+  public void setBridgeId(String bridgeId) {
+    this.bridgeId = bridgeId;
   }
 }
