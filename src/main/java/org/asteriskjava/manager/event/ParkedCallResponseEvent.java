@@ -7,6 +7,15 @@ public class ParkedCallResponseEvent extends ResponseEvent {
 
   private final ParkedCallEvent event;
 
+  public ParkedCallResponseEvent(Object source) {
+    super(source);
+    if(source instanceof ParkedCallEvent) {
+      event = (ParkedCallEvent)source;
+    } else {
+      event = null;
+    }
+  }
+  
   public ParkedCallResponseEvent(ParkedCallEvent event) {
     super(event.getSource());
     this.setActionId(event.getActionId());
