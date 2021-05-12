@@ -17,9 +17,10 @@
 package org.asteriskjava.manager.event;
 
 /**
- * A NewExtenEvent is triggered when a channel is connected to a new extension.<p>
+ * A NewExtenEvent is triggered when a channel is connected to a new extension.
+ * <p>
  * It is implemented in <code>pbx.c</code>
- * 
+ *
  * @author srt
  * @version $Id$
  */
@@ -36,7 +37,8 @@ public class NewExtenEvent extends ManagerEvent
     private String appData;
     private String channel;
     private String language;
-		private String linkedid;
+    private String accountCode;
+    private String linkedId;
 
     /**
      * @param source
@@ -48,14 +50,14 @@ public class NewExtenEvent extends ManagerEvent
 
     public String getLanguage()
     {
-    	return language;
+        return language;
     }
-    
+
     public void setLanguage(String language)
     {
-    	this.language = language;
-    }   
-    
+        this.language = language;
+    }
+
     /**
      * Returns the unique id of the channel.
      */
@@ -89,8 +91,8 @@ public class NewExtenEvent extends ManagerEvent
     }
 
     /**
-     * Returns the parameters passed to the application that is executed. The parameters are
-     * separated by a '|' character.
+     * Returns the parameters passed to the application that is executed. The
+     * parameters are separated by a '|' character.
      */
     public String getAppData()
     {
@@ -137,17 +139,24 @@ public class NewExtenEvent extends ManagerEvent
         this.extension = extension;
     }
 
-	/**
-	 * @return the linkedid
-	 */
-	public String getLinkedid() {
-		return linkedid;
-	}
+    public String getAccountCode()
+    {
+        return accountCode;
+    }
 
-	/**
-	 * @param linkedid the linkedid to set
-	 */
-	public void setLinkedid(String linkedid) {
-		this.linkedid = linkedid;
-	}
+    public void setAccountCode(String accountCode)
+    {
+        this.accountCode = accountCode;
+    }
+
+    public String getLinkedId()
+    {
+        return linkedId;
+    }
+
+    public void setLinkedId(String linkedId)
+    {
+        this.linkedId = linkedId;
+    }
+
 }

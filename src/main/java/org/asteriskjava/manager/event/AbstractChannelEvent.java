@@ -18,7 +18,7 @@ package org.asteriskjava.manager.event;
 
 /**
  * Abstract base class providing common properties channel related events.
- * 
+ *
  * @author srt
  * @version $Id$
  */
@@ -29,6 +29,8 @@ public abstract class AbstractChannelEvent extends ManagerEvent
      */
     static final long serialVersionUID = 5906599407896179295L;
 
+    protected String accountCode;
+
     /**
      * The name of the channel.
      */
@@ -37,8 +39,8 @@ public abstract class AbstractChannelEvent extends ManagerEvent
     /**
      * The unique id of the channel.
      */
-    private String uniqueId;
-		private String linkedid;
+    protected String uniqueId;
+	private String linkedid;
 
     protected AbstractChannelEvent(Object source)
     {
@@ -47,7 +49,7 @@ public abstract class AbstractChannelEvent extends ManagerEvent
 
     /**
      * Returns the name of the channel.
-     * 
+     *
      * @return the name of the channel.
      */
     public final String getChannel()
@@ -62,7 +64,7 @@ public abstract class AbstractChannelEvent extends ManagerEvent
 
     /**
      * Returns the unique id of the channel.
-     * 
+     *
      * @return the unique id of the channel.
      */
     public final String getUniqueId()
@@ -91,7 +93,7 @@ public abstract class AbstractChannelEvent extends ManagerEvent
 
     /**
      * Sets the Caller*ID of the channel.
-     * 
+     *
      * @param callerId the Caller*ID of the channel.
      * @deprecated
      */
@@ -115,4 +117,46 @@ public abstract class AbstractChannelEvent extends ManagerEvent
 		this.linkedid = linkedid;
 	}
 
+    /**
+     * Returns the Caller*ID number of the channel if set or <code>null</code>
+     * if none has been set.
+     *
+     * @return the Caller*ID number
+     * @since 0.3
+     */
+    public final String getCallerIdNum()
+    {
+        return callerIdNum;
+    }
+
+    public final void setCallerIdNum(String callerIdNum)
+    {
+        this.callerIdNum = callerIdNum;
+    }
+
+    /**
+     * Returns the Caller*ID Name of the channel if set or <code>null</code> if
+     * none has been set.
+     *
+     * @return the Caller*ID Name of the channel.
+     */
+    public final String getCallerIdName()
+    {
+        return callerIdName;
+    }
+
+    public final void setCallerIdName(String callerIdName)
+    {
+        this.callerIdName = callerIdName;
+    }
+
+    public String getAccountCode()
+    {
+        return accountCode;
+    }
+
+    public void setAccountCode(String accountCode)
+    {
+        this.accountCode = accountCode;
+    }
 }

@@ -18,6 +18,7 @@ package org.asteriskjava.live.internal;
 
 import org.asteriskjava.live.AgentState;
 import org.asteriskjava.live.AsteriskAgent;
+import org.asteriskjava.lock.Locker.LockCloser;
 
 /**
  * Default implementation of the AsteriskAgent interface.
@@ -27,9 +28,9 @@ import org.asteriskjava.live.AsteriskAgent;
  */
 public class AsteriskAgentImpl extends AbstractLiveObject implements AsteriskAgent
 {
-    public String name;
-    public String agentId;
-    public AgentState state;
+    private String name;
+    private String agentId;
+    private AgentState state;
 
     AsteriskAgentImpl(AsteriskServerImpl server, String name, String agentId, AgentState state)
     {
@@ -58,19 +59,23 @@ public class AsteriskAgentImpl extends AbstractLiveObject implements AsteriskAge
         return state;
     }
 
-    synchronized void updateState(AgentState state)
+    void updateState(AgentState state)
     {
-        final AgentState oldState = this.state;
-        this.state = state;
-        firePropertyChange(PROPERTY_STATE, oldState, this.state);
+
+        try (LockCloser closer = this.withLock())
+        {
+            final AgentState oldState = this.state;
+            this.state = state;
+            firePropertyChange(PROPERTY_STATE, oldState, this.state);
+        }
     }
 
     @Override
     public String toString()
     {
-        final StringBuffer sb;
+        final StringBuilder sb;
 
-        sb = new StringBuffer("AsteriskAgent[");
+        sb = new StringBuilder("AsteriskAgent[");
         sb.append("agentId='").append(getAgentId()).append("',");
         sb.append("name='").append(getName()).append("',");
         sb.append("state=").append(getState()).append(",");

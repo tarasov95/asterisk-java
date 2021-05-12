@@ -17,7 +17,8 @@
 package org.asteriskjava.manager.event;
 
 /**
- * A JoinEvent is triggered when a channel joines a queue.<p>
+ * A JoinEvent is triggered when a channel joines a queue.
+ * <p>
  * It is implemented in <code>apps/app_queue.c</code>
  *
  * @author srt
@@ -29,11 +30,8 @@ public class JoinEvent extends QueueEvent
      */
     static final long serialVersionUID = 0L;
 
-    protected String callerIdNum;
     protected String callerIdName;
     protected Integer position;
-    protected String connectedlinename;
-    protected String connectedlinenum;
 
     public JoinEvent(Object source)
     {
@@ -47,7 +45,8 @@ public class JoinEvent extends QueueEvent
      * @return the Caller*ID number of the channel that joined the queue
      * @deprecated since 1.0.0, use {@link #getCallerIdNum()} instead.
      */
-    @Deprecated public String getCallerId()
+    @Deprecated
+    public String getCallerId()
     {
         return callerIdNum;
     }
@@ -55,7 +54,8 @@ public class JoinEvent extends QueueEvent
     /**
      * Sets the Caller*ID number of the channel that joined the queue.
      *
-     * @param callerId the Caller*ID number of the channel that joined the queue.
+     * @param callerId the Caller*ID number of the channel that joined the
+     *            queue.
      */
     public void setCallerId(String callerId)
     {
@@ -78,35 +78,4 @@ public class JoinEvent extends QueueEvent
         this.position = position;
     }
 
-    /**
-     * Returns the Caller*ID name of the channel connected if set.
-     * If the channel has no caller id set "unknown" is returned.
-     *
-     * @since 1.0.0
-     */
-    public String getConnectedlinename()
-    {
-        return connectedlinename;
-    }
-
-    public void setConnectedlinename(String connectedlinename)
-    {
-        this.connectedlinename = connectedlinename;
-    }
-
-    /**
-     * Returns the Caller*ID number of the channel connected if set.
-     * If the channel has no caller id set "unknown" is returned.
-     *
-     * @since 1.0.0
-     */
-    public String getConnectedlinenum()
-    {
-        return connectedlinenum;
-    }
-
-    public void setConnectedlinenum(String connectedlinenum)
-    {
-        this.connectedlinenum = connectedlinenum;
-    }
 }

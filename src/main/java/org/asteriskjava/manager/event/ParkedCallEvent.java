@@ -21,12 +21,12 @@ package org.asteriskjava.manager.event;
  * action id is set) and in response to a ParkedCallsAction.
  * <p>
  * It is implemented in <code>res/res_features.c</code>
- * 
+ *
  * @see org.asteriskjava.manager.action.ParkedCallsAction
  * @author srt
  * @version $Id$
  */
-public class ParkedCallEvent extends AbstractParkedCallEvent implements IResponseEvent 
+public class ParkedCallEvent extends AbstractParkedCallEvent implements IResponseEvent
 {
     /**
      * Serializable version identifier
@@ -34,6 +34,7 @@ public class ParkedCallEvent extends AbstractParkedCallEvent implements IRespons
     private static final long serialVersionUID = 0L;
 
     private Integer timeout;
+    private String parkeelinkedid;
 
     /**
      * @param source
@@ -71,7 +72,7 @@ public class ParkedCallEvent extends AbstractParkedCallEvent implements IRespons
         setUniqueId(unqiueId);
     }
 
-//////////////////////////////////IResponseEvent//////////////////////////////    
+//////////////////////////////////IResponseEvent//////////////////////////////
     @Override
     public ResponseEvent toResponseEvent(ManagerEvent ev) {
       if(!(ev instanceof ParkedCallEvent)) {
@@ -104,6 +105,22 @@ public class ParkedCallEvent extends AbstractParkedCallEvent implements IRespons
     public final void setInternalActionId(String internalActionId)
     {
         this.internalActionId = internalActionId;
+    }
+    
+    /**
+     * @param parkeelinkedid the parkeelinkedid to set
+     */
+    public void setParkeelinkedid(String parkeelinkedid)
+    {
+        this.parkeelinkedid = parkeelinkedid;
+    }
+
+    /**
+     * @return the parkeelinkedid
+     */
+    public String getParkeelinkedid()
+    {
+        return parkeelinkedid;
     }
 
 }

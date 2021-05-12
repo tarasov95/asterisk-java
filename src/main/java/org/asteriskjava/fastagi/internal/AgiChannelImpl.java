@@ -16,9 +16,66 @@
  */
 package org.asteriskjava.fastagi.internal;
 
-import org.asteriskjava.fastagi.*;
-import org.asteriskjava.fastagi.command.*;
+import org.asteriskjava.AsteriskVersion;
+import org.asteriskjava.fastagi.AgiChannel;
+import org.asteriskjava.fastagi.AgiException;
+import org.asteriskjava.fastagi.AgiHangupException;
+import org.asteriskjava.fastagi.AgiReader;
+import org.asteriskjava.fastagi.AgiRequest;
+import org.asteriskjava.fastagi.AgiSpeechException;
+import org.asteriskjava.fastagi.AgiWriter;
+import org.asteriskjava.fastagi.InvalidCommandSyntaxException;
+import org.asteriskjava.fastagi.InvalidOrUnknownCommandException;
+import org.asteriskjava.fastagi.SpeechRecognitionResult;
+import org.asteriskjava.fastagi.command.AgiCommand;
+import org.asteriskjava.fastagi.command.AnswerCommand;
+import org.asteriskjava.fastagi.command.BridgeCommand;
+import org.asteriskjava.fastagi.command.ChannelStatusCommand;
+import org.asteriskjava.fastagi.command.ConfbridgeCommand;
+import org.asteriskjava.fastagi.command.ControlStreamFileCommand;
+import org.asteriskjava.fastagi.command.DatabaseDelCommand;
+import org.asteriskjava.fastagi.command.DatabaseDelTreeCommand;
+import org.asteriskjava.fastagi.command.DatabaseGetCommand;
+import org.asteriskjava.fastagi.command.DatabasePutCommand;
+import org.asteriskjava.fastagi.command.DialCommand;
+import org.asteriskjava.fastagi.command.ExecCommand;
+import org.asteriskjava.fastagi.command.GetDataCommand;
+import org.asteriskjava.fastagi.command.GetFullVariableCommand;
+import org.asteriskjava.fastagi.command.GetOptionCommand;
+import org.asteriskjava.fastagi.command.GetVariableCommand;
+import org.asteriskjava.fastagi.command.GosubCommand;
+import org.asteriskjava.fastagi.command.HangupCommand;
+import org.asteriskjava.fastagi.command.MeetmeCommand;
+import org.asteriskjava.fastagi.command.QueueCommand;
+import org.asteriskjava.fastagi.command.RecordFileCommand;
+import org.asteriskjava.fastagi.command.SayAlphaCommand;
+import org.asteriskjava.fastagi.command.SayDateTimeCommand;
+import org.asteriskjava.fastagi.command.SayDigitsCommand;
+import org.asteriskjava.fastagi.command.SayNumberCommand;
+import org.asteriskjava.fastagi.command.SayPhoneticCommand;
+import org.asteriskjava.fastagi.command.SayTimeCommand;
+import org.asteriskjava.fastagi.command.SetAutoHangupCommand;
+import org.asteriskjava.fastagi.command.SetCallerIdCommand;
+import org.asteriskjava.fastagi.command.SetContextCommand;
+import org.asteriskjava.fastagi.command.SetExtensionCommand;
+import org.asteriskjava.fastagi.command.SetMusicOffCommand;
+import org.asteriskjava.fastagi.command.SetMusicOnCommand;
+import org.asteriskjava.fastagi.command.SetPriorityCommand;
+import org.asteriskjava.fastagi.command.SetVariableCommand;
+import org.asteriskjava.fastagi.command.SpeechActivateGrammarCommand;
+import org.asteriskjava.fastagi.command.SpeechCreateCommand;
+import org.asteriskjava.fastagi.command.SpeechDeactivateGrammarCommand;
+import org.asteriskjava.fastagi.command.SpeechDestroyCommand;
+import org.asteriskjava.fastagi.command.SpeechLoadGrammarCommand;
+import org.asteriskjava.fastagi.command.SpeechRecognizeCommand;
+import org.asteriskjava.fastagi.command.SpeechSetCommand;
+import org.asteriskjava.fastagi.command.SpeechUnloadGrammarCommand;
+import org.asteriskjava.fastagi.command.StreamFileCommand;
+import org.asteriskjava.fastagi.command.VerboseCommand;
+import org.asteriskjava.fastagi.command.WaitForDigitCommand;
 import org.asteriskjava.fastagi.reply.AgiReply;
+import org.asteriskjava.util.Log;
+import org.asteriskjava.util.LogFactory;
 
 /**
  * Default implementation of the AgiChannel interface.
@@ -31,6 +88,9 @@ public class AgiChannelImpl implements AgiChannel
     private final AgiRequest request;
     private final AgiWriter agiWriter;
     private final AgiReader agiReader;
+    private AsteriskVersion asteriskVersion;
+
+    private static Log logger = LogFactory.getLog(AgiChannelImpl.class);
 
     private AgiReply lastReply;
 
@@ -59,6 +119,9 @@ public class AgiChannelImpl implements AgiChannel
 
     public synchronized AgiReply sendCommand(AgiCommand command) throws AgiException
     {
+        // make the Asterisk Version available to the AgiCommand, with out
+        // causing a major refactor
+        command.setAsteriskVersion(getAsteriskVersion());
         agiWriter.sendCommand(command);
         lastReply = agiReader.readReply();
 
@@ -76,6 +139,20 @@ public class AgiChannelImpl implements AgiChannel
         }
 
         return lastReply;
+    }
+
+    public AsteriskVersion getAsteriskVersion()
+    {
+        if (request == null)
+        {
+            logger.warn("Request is null, I assume you're testing...");
+            return AsteriskVersion.DEFAULT_VERSION;
+        }
+        if (asteriskVersion == null)
+        {
+            asteriskVersion = request.getAsteriskVersion();
+        }
+        return asteriskVersion;
     }
 
     public void answer() throws AgiException
@@ -178,17 +255,29 @@ public class AgiChannelImpl implements AgiChannel
 
     public void streamFile(String file) throws AgiException
     {
+        checkFile(file);
         sendCommand(new StreamFileCommand(file));
+    }
+
+    private void checkFile(String file)
+    {
+        if (file == null || file.length() == 0)
+        {
+            logger.error(
+                    "Call to streamFile with empty file, this will result in AGI setting AGISTATUS = FAILURE and returning -1");
+        }
     }
 
     public char streamFile(String file, String escapeDigits) throws AgiException
     {
+        checkFile(file);
         sendCommand(new StreamFileCommand(file, escapeDigits));
         return lastReply.getResultCodeAsChar();
     }
 
     public char streamFile(String file, String escapeDigits, int offset) throws AgiException
     {
+        checkFile(file);
         sendCommand(new StreamFileCommand(file, escapeDigits, offset));
         return lastReply.getResultCodeAsChar();
     }
@@ -353,7 +442,8 @@ public class AgiChannelImpl implements AgiChannel
         return lastReply.getResultCodeAsChar();
     }
 
-    public char recordFile(String file, String format, String escapeDigits, int timeout, int offset, boolean beep, int maxSilence) throws AgiException
+    public char recordFile(String file, String format, String escapeDigits, int timeout, int offset, boolean beep,
+            int maxSilence) throws AgiException
     {
         sendCommand(new RecordFileCommand(file, format, escapeDigits, timeout, offset, beep, maxSilence));
         return lastReply.getResultCodeAsChar();
@@ -376,7 +466,8 @@ public class AgiChannelImpl implements AgiChannel
         return lastReply.getResultCodeAsChar();
     }
 
-    public char controlStreamFile(String file, String escapeDigits, int offset, String forwardDigit, String rewindDigit, String pauseDigit) throws AgiException
+    public char controlStreamFile(String file, String escapeDigits, int offset, String forwardDigit, String rewindDigit,
+            String pauseDigit) throws AgiException
     {
         sendCommand(new ControlStreamFileCommand(file, escapeDigits, offset, forwardDigit, rewindDigit, pauseDigit));
         return lastReply.getResultCodeAsChar();
@@ -396,10 +487,7 @@ public class AgiChannelImpl implements AgiChannel
             {
                 throw new AgiSpeechException("Speech object for default engine cannot be created");
             }
-            else
-            {
-                throw new AgiSpeechException("Speech object for engine '" + engine + "' cannot be created");
-            }
+            throw new AgiSpeechException("Speech object for engine '" + engine + "' cannot be created");
         }
     }
 
@@ -499,7 +587,44 @@ public class AgiChannelImpl implements AgiChannel
     {
         sendCommand(new GosubCommand(context, extension, priority, arguments));
     }
-		
-		
-		public AgiRequest getInternalAgiRequest () { return request;}
+
+    public AgiRequest getInternalAgiRequest()
+    {
+        return request;
+    }
+
+    @Override
+    public void confbridge(String room, String profile) throws AgiException
+    {
+        sendCommand(new ConfbridgeCommand(room, profile));
+
+    }
+
+    @Override
+    public void meetme(String room, String options) throws AgiException
+    {
+        sendCommand(new MeetmeCommand(room, options));
+
+    }
+
+    @Override
+    public void dial(String target, int timeout, String options) throws AgiException
+    {
+        sendCommand(new DialCommand(target, timeout, options));
+
+    }
+
+    @Override
+    public void bridge(String channelName, String options) throws AgiException
+    {
+        sendCommand(new BridgeCommand(channelName, options));
+
+    }
+
+    @Override
+    public void queue(String queue) throws AgiException
+    {
+        sendCommand(new QueueCommand(queue));
+
+    }
 }

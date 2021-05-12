@@ -44,7 +44,7 @@ public class DtmfEvent extends ManagerEvent
     /**
      * Serializable version identifier.
      */
-    static final long serialVersionUID = 0L;
+    static final long serialVersionUID = 1L;
 
     public static final String DIRECTION_RECEIVED = "Received";
     public static final String DIRECTION_SENT = "Sent";
@@ -55,6 +55,10 @@ public class DtmfEvent extends ManagerEvent
     private String direction;
     private Boolean begin;
     private Boolean end;
+    
+    private String language;
+    private String linkedId;
+    private String accountCode;
 
     /**
      * Creates a new DtmfEvent.
@@ -215,7 +219,7 @@ public class DtmfEvent extends ManagerEvent
      */
     public boolean isReceived()
     {
-        return direction != null && DIRECTION_RECEIVED.equalsIgnoreCase(direction);
+        return DIRECTION_RECEIVED.equalsIgnoreCase(direction);
     }
 
     /**
@@ -227,6 +231,38 @@ public class DtmfEvent extends ManagerEvent
      */
     public boolean isSent()
     {
-        return direction != null && DIRECTION_SENT.equalsIgnoreCase(direction);
+        return DIRECTION_SENT.equalsIgnoreCase(direction);
     }
+
+    public String getLanguage()
+    {
+        return language;
+    }
+
+    public void setLanguage(String language)
+    {
+        this.language = language;
+    }
+
+    public String getLinkedId()
+    {
+        return linkedId;
+    }
+
+    public void setLinkedId(String linkedId)
+    {
+        this.linkedId = linkedId;
+    }
+
+    public String getAccountCode()
+    {
+        return accountCode;
+    }
+
+    public void setAccountCode(String accountCode)
+    {
+        this.accountCode = accountCode;
+    }
+    
+    
 }

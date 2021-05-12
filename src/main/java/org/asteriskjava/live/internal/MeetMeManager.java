@@ -16,8 +16,17 @@
  */
 package org.asteriskjava.live.internal;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.asteriskjava.live.ManagerCommunicationException;
 import org.asteriskjava.live.MeetMeRoom;
+import org.asteriskjava.lock.LockableMap;
+import org.asteriskjava.lock.Locker.LockCloser;
 import org.asteriskjava.manager.action.CommandAction;
 import org.asteriskjava.manager.event.AbstractMeetMeEvent;
 import org.asteriskjava.manager.event.MeetMeLeaveEvent;
@@ -29,10 +38,6 @@ import org.asteriskjava.manager.response.ManagerResponse;
 import org.asteriskjava.util.DateUtil;
 import org.asteriskjava.util.Log;
 import org.asteriskjava.util.LogFactory;
-
-import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Manages MeetMe events on behalf of an AsteriskServer.
@@ -51,18 +56,18 @@ class MeetMeManager
     /**
      * Maps room number to MeetMe room.
      */
-    private final Map<String, MeetMeRoomImpl> rooms;
+    private final LockableMap<String, MeetMeRoomImpl> rooms;
 
     MeetMeManager(AsteriskServerImpl server, ChannelManager channelManager)
     {
         this.server = server;
         this.channelManager = channelManager;
-        this.rooms = new HashMap<String, MeetMeRoomImpl>();
+        this.rooms = new LockableMap<>(new HashMap<>());
     }
 
     void initialize()
     {
-        synchronized (rooms)
+        try (LockCloser closer = rooms.withLock())
         {
             for (MeetMeRoomImpl room : rooms.values())
             {
@@ -74,7 +79,7 @@ class MeetMeManager
     void disconnected()
     {
         /*
-         * synchronized (rooms) { rooms.clear(); }
+         * try (LockCloser closer = Locker2.lock(rooms) { rooms.clear(); }
          */
     }
 
@@ -82,8 +87,8 @@ class MeetMeManager
     {
         final Collection<MeetMeRoom> result;
 
-        result = new ArrayList<MeetMeRoom>();
-        synchronized (rooms)
+        result = new ArrayList<>();
+        try (LockCloser closer = rooms.withLock())
         {
             for (MeetMeRoom room : rooms.values())
             {
@@ -111,7 +116,7 @@ class MeetMeManager
             return;
         }
 
-        userNumber = event.getUserNum();
+        userNumber = event.getUser();
         if (userNumber == null)
         {
             logger.warn("UserNumber (userNum property) is null. Ignoring " + event.getClass().getName());
@@ -181,13 +186,13 @@ class MeetMeManager
         final CommandAction meetMeListAction;
         final ManagerResponse response;
         final List<String> lines;
-        final Collection<Integer> userNumbers = new ArrayList<Integer>(); // list
-                                                                          // of
-                                                                          // user
-                                                                          // numbers
-                                                                          // in
-                                                                          // the
-                                                                          // room
+        final Collection<Integer> userNumbers = new ArrayList<>(); // list
+                                                                   // of
+                                                                   // user
+                                                                   // numbers
+                                                                   // in
+                                                                   // the
+                                                                   // room
 
         meetMeListAction = new CommandAction(MEETME_LIST_COMMAND + " " + room.getRoomNumber());
         try
@@ -279,7 +284,7 @@ class MeetMeManager
                 channelUser.setMuted(muted);
                 room.addUser(channelUser);
             }
-            else if (channelUser == null)
+            else if (channelUser == null && roomUser != null)
             {
                 roomUser.setMuted(muted);
                 channel.setMeetMeUserImpl(roomUser);
@@ -295,7 +300,7 @@ class MeetMeManager
         }
 
         Collection<MeetMeUserImpl> users = room.getUserImpls();
-        Collection<MeetMeUserImpl> usersToRemove = new ArrayList<MeetMeUserImpl>();
+        Collection<MeetMeUserImpl> usersToRemove = new ArrayList<>();
         for (MeetMeUserImpl user : users)
         {
             if (!userNumbers.contains(user.getUserNumber()))
@@ -322,7 +327,7 @@ class MeetMeManager
 
         roomNumber = event.getMeetMe();
         room = getOrCreateRoomImpl(roomNumber);
-        user = room.getUser(event.getUserNum());
+        user = room.getUser(event.getUser());
         if (user != null)
         {
             return user;
@@ -355,8 +360,8 @@ class MeetMeManager
             channel.setMeetMeUserImpl(null);
         }
 
-        logger.info("Adding channel " + channel.getName() + " as user " + event.getUserNum() + " to room " + roomNumber);
-        user = new MeetMeUserImpl(server, room, event.getUserNum(), channel, event.getDateReceived());
+        logger.info("Adding channel " + channel.getName() + " as user " + event.getUser() + " to room " + roomNumber);
+        user = new MeetMeUserImpl(server, room, event.getUser(), channel, event.getDateReceived());
         room.addUser(user);
         channel.setMeetMeUserImpl(user);
         server.fireNewMeetMeUser(user);
@@ -376,7 +381,7 @@ class MeetMeManager
         MeetMeRoomImpl room;
         boolean created = false;
 
-        synchronized (rooms)
+        try (LockCloser closer = rooms.withLock())
         {
             room = rooms.get(roomNumber);
             if (room == null)

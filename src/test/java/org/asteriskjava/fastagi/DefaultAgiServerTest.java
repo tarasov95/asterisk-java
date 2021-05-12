@@ -37,7 +37,7 @@ public class DefaultAgiServerTest
     private SocketConnectionFacade socket;
 
     @Before
-    public void setUp() throws Exception
+    public void setUp()
     {
         serverSocket = new MockedServerSocketFacade();
         server = new MockedDefaultAgiServer();
@@ -116,15 +116,16 @@ public class DefaultAgiServerTest
             {
                 return socket;
             }
-            else
-            {
-                throw new IOException("Provoked IOException");
-            }
+            throw new IOException("Provoked IOException");
         }
 
         public void close() throws IOException
         {
             closeCalls++;
+        }
+
+        public void setSocketReadTimeout(int socketReadTimeout)
+        {
         }
     }
 

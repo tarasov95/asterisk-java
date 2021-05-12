@@ -71,11 +71,12 @@ public class ParkedCallResponseEvent extends ResponseEvent {
   }
 
   public Integer getParkeeConnectedLineNum() {
-    return event.getParkeeConnectedLineNum();
+    final String z = event.getParkeeConnectedLineNum();
+    return z==null?null:Integer.parseInt(z);
   }
 
   public void setParkeeConnectedLineNum(Integer parkeeConnectedLineNum) {
-    event.setParkeeConnectedLineNum(parkeeConnectedLineNum);
+    event.setParkeeConnectedLineNum(parkeeConnectedLineNum==null?null:parkeeConnectedLineNum.toString());
   }
 
   public String getParkeeConnectedLineName() {

@@ -6,33 +6,33 @@ package org.asteriskjava.manager.event;
 public class AgiExecEndEvent extends AgiExecEvent
 {
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 
-//AgiExecEndEvent
-    private String linkedid;
-    private String language;
+	private String linkedid;
 
-    public void setLinkedid(String linkedid) {
-        this.linkedid=linkedid;
-    }
+	private String language;
 
-    public String getLinkedid() {
-        return this.linkedid;
-    }
-
-    public void setLanguage(String language) {
-        this.language=language;
-    }
-
-    public String getLanguage() {
-        return this.language;
-    }
-	
 	public AgiExecEndEvent(Object source)
 	{
 		super(source);
 		setSubEvent(SUB_EVENT_END);
+	}
+
+	public String getLinkedid() {
+		return linkedid;
+	}
+
+	public void setLinkedid(String linkedid) {
+		this.linkedid = linkedid;
+	}
+
+	public String getLanguage() {
+		return language;
+	}
+
+	public void setLanguage(String language) {
+		this.language = language;
 	}
 }

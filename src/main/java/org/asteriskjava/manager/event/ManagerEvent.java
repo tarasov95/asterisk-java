@@ -17,7 +17,11 @@
 package org.asteriskjava.manager.event;
 
 import java.lang.reflect.Method;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.EventObject;
+import java.util.List;
+import java.util.Map;
 
 import org.asteriskjava.util.AstState;
 import org.asteriskjava.util.ReflectionUtil;
@@ -27,7 +31,7 @@ import org.asteriskjava.util.ReflectionUtil;
  * server. <br>
  * Events contain data pertaining to an event generated from within the Asterisk
  * core or an extension module. <br>
- * There is one conrete subclass of ManagerEvent per each supported Asterisk
+ * There is one concrete subclass of ManagerEvent per each supported Asterisk
  * Event.
  *
  * @author srt
@@ -226,8 +230,10 @@ public abstract class ManagerEvent extends EventObject
     /**
      * Returns the timestamp for this event. <br>
      * The timestamp property is available in Asterisk since 1.4 if enabled in
-     * <code>manager.conf</code> by setting <code>timestampevents = yes</code>. <br>
-     * In contains the time the event was generated in seconds since the epoch. <br>
+     * <code>manager.conf</code> by setting <code>timestampevents = yes</code>.
+     * <br>
+     * In contains the time the event was generated in seconds since the epoch.
+     * <br>
      * Example: 1159310429.569108
      *
      * @return the timestamp for this event.

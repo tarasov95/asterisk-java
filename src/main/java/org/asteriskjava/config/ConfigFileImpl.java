@@ -16,10 +16,13 @@
  */
 package org.asteriskjava.config;
 
-import java.util.Map;
-import java.util.List;
-import java.util.TreeMap;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+
+import org.asteriskjava.lock.LockableMap;
+import org.asteriskjava.lock.Locker.LockCloser;
 
 /**
  * An Asterisk configuration file read from the filesystem.
@@ -31,12 +34,12 @@ import java.util.ArrayList;
 public class ConfigFileImpl implements ConfigFile
 {
     private final String filename;
-    protected final Map<String, Category> categories;
+    protected final LockableMap<String, Category> categories;
 
     public ConfigFileImpl(String filename, Map<String, Category> categories)
     {
         this.filename = filename;
-        this.categories = categories;
+        this.categories = new LockableMap<>(categories);
     }
 
     public String getFilename()
@@ -48,15 +51,15 @@ public class ConfigFileImpl implements ConfigFile
     {
         final Map<String, List<String>> c;
 
-        c = new TreeMap<String, List<String>>();
+        c = new TreeMap<>();
 
-        synchronized (categories)
+        try (LockCloser closer = categories.withLock())
         {
             for (Category category : categories.values())
             {
                 List<String> lines;
 
-                lines = new ArrayList<String>();
+                lines = new ArrayList<>();
                 for (ConfigElement element : category.getElements())
                 {
                     if (element instanceof ConfigVariable)
@@ -103,7 +106,7 @@ public class ConfigFileImpl implements ConfigFile
         final List<String> result;
 
         category = getCategory(categoryName);
-        result = new ArrayList<String>();
+        result = new ArrayList<>();
         if (category == null)
         {
             return result;
@@ -126,7 +129,7 @@ public class ConfigFileImpl implements ConfigFile
 
     protected Category getCategory(String name)
     {
-        synchronized (categories)
+        try (LockCloser closer = categories.withLock())
         {
             return categories.get(name);
         }

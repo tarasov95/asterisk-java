@@ -16,13 +16,14 @@
  */
 package org.asteriskjava.live.internal;
 
-import org.asteriskjava.live.AsteriskServer;
-import org.asteriskjava.live.LiveObject;
-import org.asteriskjava.util.Log;
-import org.asteriskjava.util.LogFactory;
-
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+
+import org.asteriskjava.live.AsteriskServer;
+import org.asteriskjava.live.LiveObject;
+import org.asteriskjava.lock.Lockable;
+import org.asteriskjava.util.Log;
+import org.asteriskjava.util.LogFactory;
 
 /**
  * Abstract base class for all live objects.
@@ -30,7 +31,7 @@ import java.beans.PropertyChangeSupport;
  * @author srt
  * @since 0.3
  */
-abstract class AbstractLiveObject implements LiveObject
+abstract class AbstractLiveObject extends Lockable implements LiveObject
 {
     private final Log logger = LogFactory.getLog(this.getClass());
     private final PropertyChangeSupport changes;

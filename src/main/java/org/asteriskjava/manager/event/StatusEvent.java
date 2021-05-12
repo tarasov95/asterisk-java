@@ -51,9 +51,11 @@ public class StatusEvent extends ResponseEvent
     private String pickupGroup;
     private String timeToHangup;
     private Map<String, String> variables;
-    private String readtrans;
+    private String dnid;
     private String writetrans;
     private String bridgeId;
+    private String readtrans;
+    private String language;
 
     public StatusEvent(Object source)
     {
@@ -444,45 +446,77 @@ public class StatusEvent extends ResponseEvent
         this.timeToHangup = timeToHangup;
     }
 
-  /**
-   * @return the readtrans
-   */
-  public String getReadtrans() {
-    return readtrans;
-  }
+    /**
+     * @return the dnid
+     */
+    public String getDnid()
+    {
+        return dnid;
+    }
 
-  /**
-   * @param readtrans the readtrans to set
-   */
-  public void setReadtrans(String readtrans) {
-    this.readtrans = readtrans;
-  }
+    /**
+     * @param dnid the dnid to set
+     */
+    public void setDnid(String dnid)
+    {
+        this.dnid = dnid;
+    }
 
-  /**
-   * @return the writetrans
-   */
-  public String getWritetrans() {
-    return writetrans;
-  }
+    /**
+     * @return the writetrans
+     */
+    public String getWritetrans()
+    {
+        return writetrans;
+    }
 
-  /**
-   * @param writetrans the writetrans to set
-   */
-  public void setWritetrans(String writetrans) {
-    this.writetrans = writetrans;
-  }
+    /**
+     * @param writetrans the writetrans to set
+     */
+    public void setWritetrans(String writetrans)
+    {
+        this.writetrans = writetrans;
+    }
 
-  /**
-   * @return the bridgeId
-   */
-  public String getBridgeId() {
-    return bridgeId;
-  }
+    /**
+     * @return the bridgeid
+     */
+    public String getBridgeId()
+    {
+        return bridgeId;
+    }
 
-  /**
-   * @param bridgeId the bridgeId to set
-   */
-  public void setBridgeId(String bridgeId) {
-    this.bridgeId = bridgeId;
-  }
+    /**
+     * @param bridgeid the bridgeid to set
+     */
+    public void setBridgeId(String bridgeid)
+    {
+        this.bridgeId = bridgeid;
+    }
+
+    /**
+     * @return the readtrans
+     */
+    public String getReadtrans()
+    {
+        return readtrans;
+    }
+
+    /**
+     * @param readtrans the readtrans to set
+     */
+    public void setReadtrans(String readtrans)
+    {
+        this.readtrans = readtrans;
+    }
+
+    public String getLanguage()
+    {
+        return language;
+    }
+
+    public void setLanguage(String language)
+    {
+        this.language = language;
+    }
 }

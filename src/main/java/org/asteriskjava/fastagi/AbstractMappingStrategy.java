@@ -16,33 +16,33 @@
  */
 package org.asteriskjava.fastagi;
 
+import java.io.File;
 import java.lang.reflect.Constructor;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.net.MalformedURLException;
-import java.util.List;
 import java.util.ArrayList;
-import java.io.File;
+import java.util.List;
 
+import org.asteriskjava.lock.Lockable;
 import org.asteriskjava.util.Log;
 import org.asteriskjava.util.LogFactory;
 
 /**
- * Abstract base class for common mapping strategies.
- * <br>
+ * Abstract base class for common mapping strategies. <br>
  * If you implement your own mapping strategy you can derive from this class.
  *
  * @author srt
  * @since 0.3
  */
-public abstract class AbstractMappingStrategy implements MappingStrategy
+public abstract class AbstractMappingStrategy extends Lockable implements MappingStrategy
 {
     /**
      * Reference to Asterisk-Java's logging subsystem.
      */
     protected Log logger = LogFactory.getLog(getClass());
     private static final String[] DEFAULT_SCRIPT_PATH = new String[]{"agi"};
-    
+
     private ClassLoader defaultClassLoader = null;
 
     @Override
@@ -55,11 +55,14 @@ public abstract class AbstractMappingStrategy implements MappingStrategy
 
     /**
      * Returns the ClassLoader to use for loading AgiScript classes and load
-     * other resources like the mapping properties file.<p>
-     * By default this method returns a class loader that searches for classes in the
-     * "agi" subdirectory (if it exists) and uses the context class loader of the
-     * current thread as the parent class loader.<p>
-     * You can override this method if you prefer using a different class loader.
+     * other resources like the mapping properties file.
+     * <p>
+     * By default this method returns a class loader that searches for classes
+     * in the "agi" subdirectory (if it exists) and uses the context class
+     * loader of the current thread as the parent class loader.
+     * <p>
+     * You can override this method if you prefer using a different class
+     * loader.
      *
      * @return the ClassLoader to use for loading AgiScript classes and load
      *         other resources like the mapping properties file.
@@ -70,12 +73,12 @@ public abstract class AbstractMappingStrategy implements MappingStrategy
         if (defaultClassLoader == null)
         {
             final ClassLoader parentClassLoader = Thread.currentThread().getContextClassLoader();
-            final List<URL> dirUrls = new ArrayList<URL>();
+            final List<URL> dirUrls = new ArrayList<>();
 
             for (String scriptPathEntry : DEFAULT_SCRIPT_PATH)
             {
                 final File scriptDir = new File(scriptPathEntry);
-                if (! scriptDir.isDirectory())
+                if (!scriptDir.isDirectory())
                 {
                     continue;
                 }
@@ -90,7 +93,7 @@ public abstract class AbstractMappingStrategy implements MappingStrategy
                 }
             }
 
-            if (dirUrls.size() == 0)
+            if (dirUrls.isEmpty())
             {
                 return parentClassLoader;
             }
@@ -105,7 +108,7 @@ public abstract class AbstractMappingStrategy implements MappingStrategy
      * Creates a new instance of an AGI script.
      *
      * @param className Class name of the AGI script. The class must implement
-     *                  {@link AgiScript}.
+     *            {@link AgiScript}.
      * @return the created instance of the AGI script class. If the instance
      *         can't be created an error is logged and <code>null</code> is
      *         returned.
@@ -113,7 +116,7 @@ public abstract class AbstractMappingStrategy implements MappingStrategy
     @SuppressWarnings("unchecked")
     protected AgiScript createAgiScriptInstance(String className)
     {
-        Class<?> tmpClass;
+        Class< ? > tmpClass;
         Class<AgiScript> agiScriptClass;
         Constructor<AgiScript> constructor;
         AgiScript agiScript;

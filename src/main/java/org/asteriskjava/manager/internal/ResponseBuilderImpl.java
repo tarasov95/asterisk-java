@@ -16,9 +16,17 @@
  */
 package org.asteriskjava.manager.internal;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
-import org.asteriskjava.manager.response.*;
+import org.asteriskjava.manager.response.CommandResponse;
+import org.asteriskjava.manager.response.ManagerError;
+import org.asteriskjava.manager.response.ManagerResponse;
 
 
 /**
@@ -30,14 +38,16 @@ import org.asteriskjava.manager.response.*;
  */
 class ResponseBuilderImpl extends AbstractBuilder implements ResponseBuilder
 {
-    private static final Set<String> ignoredAttributes = new HashSet<String>(Arrays.asList(
+    private static final Set<String> ignoredAttributes = new HashSet<>(Arrays.asList(
             "attributes", "proxyresponse", ManagerReader.COMMAND_RESULT_RESPONSE_KEY));
 
     private static final String RESPONSE_KEY = "response";
     private static final String PROXY_RESPONSE_KEY = "proxyresponse";
     private static final String RESPONSE_TYPE_ERROR = "error";
+    private static final String OUTPUT_RESPONSE_KEY = "output"; //Asterisk 14.3.0
 
-    public ManagerResponse buildResponse(Class<? extends ManagerResponse> responseClass, Map<String, Object> attributes)
+    @SuppressWarnings("unchecked")
+	public ManagerResponse buildResponse(Class<? extends ManagerResponse> responseClass, Map<String, Object> attributes)
     {
         final ManagerResponse response;
         final String responseType = (String) attributes.get(RESPONSE_KEY);
@@ -54,7 +64,7 @@ class ResponseBuilderImpl extends AbstractBuilder implements ResponseBuilder
         {
             try
             {
-                response = responseClass.newInstance();
+                response = responseClass.getDeclaredConstructor().newInstance();
             }
             catch (Exception ex)
             {
@@ -68,14 +78,28 @@ class ResponseBuilderImpl extends AbstractBuilder implements ResponseBuilder
         if (response instanceof CommandResponse)
         {
             final CommandResponse commandResponse = (CommandResponse) response;
-            final List<String> result = new ArrayList<String>();
-            for (String resultLine : ((String) attributes.get(ManagerReader.COMMAND_RESULT_RESPONSE_KEY)).split("\n"))
-            {
-                // on error there is a leading space
-                if (!resultLine.equals("--END COMMAND--") && !resultLine.equals(" --END COMMAND--"))
-                {
-                    result.add(resultLine);
-                }
+            final List<String> result = new ArrayList<>();
+            //For Asterisk 14
+            if(attributes.get(OUTPUT_RESPONSE_KEY) != null){
+            	if(attributes.get(OUTPUT_RESPONSE_KEY) instanceof List){
+	            	for(String tmp : (List<String>)attributes.get(OUTPUT_RESPONSE_KEY)){
+	            		if(tmp != null && tmp.length() != 0){
+	            			result.add(tmp.trim());
+	            		}
+	            	}
+            	}else{
+            		result.add((String)attributes.get(OUTPUT_RESPONSE_KEY));
+            	}
+            	
+            }else{
+	            for (String resultLine : ((String) attributes.get(ManagerReader.COMMAND_RESULT_RESPONSE_KEY)).split("\n"))
+	            {
+	                // on error there is a leading space
+	                if (!resultLine.equals("--END COMMAND--") && !resultLine.equals(" --END COMMAND--"))
+	                {
+	                    result.add(resultLine);
+	                }
+	            }
             }
             commandResponse.setResult(result);
         }
@@ -87,7 +111,7 @@ class ResponseBuilderImpl extends AbstractBuilder implements ResponseBuilder
 
         // make the map of all attributes available to the response
         // but clone it as it is reused by the ManagerReader
-        response.setAttributes(new HashMap<String, Object>(attributes));
+        response.setAttributes(new HashMap<>(attributes));
 
         return response;
     }

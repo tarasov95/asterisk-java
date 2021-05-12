@@ -24,6 +24,7 @@ import static org.junit.Assert.fail;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.asteriskjava.AsteriskVersion;
 import org.asteriskjava.fastagi.AgiRequest;
 import org.junit.Test;
 
@@ -53,6 +54,7 @@ public class AgiRequestImplTest
         lines.add("agi_priority: 1");
         lines.add("agi_enhanced: 0.0");
         lines.add("agi_accountcode: ");
+        lines.add("agi_version: 13.1.0~dfsg-1.1ubuntu4.1");
 
         request = new AgiRequestImpl(lines);
 
@@ -72,6 +74,7 @@ public class AgiRequestImplTest
         assertEquals("incorrect priority", new Integer(1), request.getPriority());
         assertEquals("incorrect enhanced", Boolean.FALSE, request.getEnhanced());
         assertNull("incorrect accountCode must not be set", request.getAccountCode());
+        assertEquals("incorret Asterisk Version Number", AsteriskVersion.ASTERISK_13, request.getAsteriskVersion());
     }
 
     @Test
@@ -339,7 +342,8 @@ public class AgiRequestImplTest
         assertEquals("incorrect requestURL", "agi://host/myscript.agi", request.getRequestURL());
         assertEquals("incorrect value for unset parameter 'param1'", null, request.getParameter("param1"));
         assertNotNull("getParameterValues() must not return null", request.getParameterValues("param1"));
-        assertEquals("incorrect size of values for unset parameter 'param1'", 0, request.getParameterValues("param1").length);
+        assertEquals("incorrect size of values for unset parameter 'param1'", 0,
+                request.getParameterValues("param1").length);
         assertNotNull("getParameterMap() must not return null", request.getParameterMap());
         assertEquals("incorrect size of getParameterMap()", 0, request.getParameterMap().size());
     }
@@ -363,8 +367,8 @@ public class AgiRequestImplTest
         assertEquals("incorrect value for parameter 'param2'", "value2", request.getParameter("param2"));
         assertEquals("incorrect value for unset parameter 'param3'", null, request.getParameter("param3"));
         assertEquals("incorrect size of getParameterMap()", 2, request.getParameterMap().size());
-        assertEquals("incorrect value for parameter 'param1' when obtained from map", "value1", ((String[]) request
-                .getParameterMap().get("param1"))[0]);
+        assertEquals("incorrect value for parameter 'param1' when obtained from map", "value1",
+                request.getParameterMap().get("param1")[0]);
     }
 
     @Test

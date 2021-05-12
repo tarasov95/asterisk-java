@@ -38,9 +38,10 @@ public class AbstractHoldEvent extends ManagerEvent
     private String uniqueId;
 
     private Boolean status;
-		
-		private String language;
-		private String linkedid;
+
+    private String linkedId;
+    private String language;
+
 
     /**
      * Creates a new HoldEvent.
@@ -140,6 +141,36 @@ public class AbstractHoldEvent extends ManagerEvent
         return status != null && !status;
     }
 
+    public String getAccountCode()
+    {
+        return accountCode;
+    }
+
+    public void setAccountCode(String accountCode)
+    {
+        this.accountCode = accountCode;
+    }
+
+    public String getLinkedId()
+    {
+        return linkedId;
+    }
+
+    public void setLinkedId(String linkedId)
+    {
+        this.linkedId = linkedId;
+    }
+
+    public String getLanguage()
+    {
+        return language;
+    }
+
+    public void setLanguage(String language)
+    {
+        this.language = language;
+    }
+
     public String getCallerIDNum()
     {
         return callerIDNum;
@@ -159,42 +190,4 @@ public class AbstractHoldEvent extends ManagerEvent
     {
         this.callerIDName = callerIDName;
     }
-
-    public String getAccountCode()
-    {
-        return accountCode;
-    }
-
-    public void setAccountCode(String accountCode)
-    {
-        this.accountCode = accountCode;
-    }
-
-	/**
-	 * @return the language
-	 */
-	public String getLanguage() {
-		return language;
-	}
-
-	/**
-	 * @param language the language to set
-	 */
-	public void setLanguage(String language) {
-		this.language = language;
-	}
-
-	/**
-	 * @return the linkedid
-	 */
-	public String getLinkedid() {
-		return linkedid;
-	}
-
-	/**
-	 * @param linkedid the linkedid to set
-	 */
-	public void setLinkedid(String linkedid) {
-		this.linkedid = linkedid;
-	}
 }

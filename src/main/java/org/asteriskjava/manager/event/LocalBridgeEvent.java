@@ -63,8 +63,11 @@ public class LocalBridgeEvent extends ManagerEvent
     private String localOneCalleridNum;
     private String localTwoConnectedLineName;
     private String localTwoConnectedLineNum;
-		private String localonelinkedid;
-    private String localtwolinkedid;
+
+    private String localTwoLinkedid;
+    private String localOneLinkedid;
+    private String localOneAccountCode;
+    private String localTwoAccountCode;
 
     public LocalBridgeEvent(Object source)
     {
@@ -386,31 +389,43 @@ public class LocalBridgeEvent extends ManagerEvent
         this.localTwoConnectedLineNum = localTwoConnectedLineNum;
     }
 
-	/**
-	 * @return the localonelinkedid
-	 */
-	public String getLocalonelinkedid() {
-		return localonelinkedid;
-	}
+    public String getLocalTwoLinkedid()
+    {
+        return localTwoLinkedid;
+    }
 
-	/**
-	 * @param localonelinkedid the localonelinkedid to set
-	 */
-	public void setLocalonelinkedid(String localonelinkedid) {
-		this.localonelinkedid = localonelinkedid;
-	}
+    public void setLocalTwoLinkedid(String localTwoLinkedid)
+    {
+        this.localTwoLinkedid = localTwoLinkedid;
+    }
 
-	/**
-	 * @return the localtwolinkedid
-	 */
-	public String getLocaltwolinkedid() {
-		return localtwolinkedid;
-	}
+    public String getLocalOneLinkedid()
+    {
+        return localOneLinkedid;
+    }
 
-	/**
-	 * @param localtwolinkedid the localtwolinkedid to set
-	 */
-	public void setLocaltwolinkedid(String localtwolinkedid) {
-		this.localtwolinkedid = localtwolinkedid;
-	}
+    public void setLocalOneLinkedid(String localOneLinkedid)
+    {
+        this.localOneLinkedid = localOneLinkedid;
+    }
+
+    public String getLocalOneAccountCode()
+    {
+        return localOneAccountCode;
+    }
+
+    public void setLocalOneAccountCode(String localOneAccountCode)
+    {
+        this.localOneAccountCode = localOneAccountCode;
+    }
+
+    public String getLocalTwoAccountCode()
+    {
+        return localTwoAccountCode;
+    }
+
+    public void setLocalTwoAccountCode(String localTwoAccountCode)
+    {
+        this.localTwoAccountCode = localTwoAccountCode;
+    }
 }

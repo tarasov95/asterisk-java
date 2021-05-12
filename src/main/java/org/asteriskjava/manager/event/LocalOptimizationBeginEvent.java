@@ -1,552 +1,525 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ *  Copyright 2018 Sean Bright
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ *
  */
 package org.asteriskjava.manager.event;
 
+
 /**
- *
- * @author tarasov
+ * Raised when two halves of a Local Channel begin to optimize themselves out of
+ * the media path. Available since Asterisk 12
  */
-public class LocalOptimizationBeginEvent extends ManagerEvent {
+public class LocalOptimizationBeginEvent extends ManagerEvent
+{
+    private static final long serialVersionUID = 0L;
 
-    private String    localonecontext;
-    private String    localoneconnectedlinenum;
-    private String    sourceuniqueid;
-    private String    sourceconnectedlinenum;
-    private String    localoneconnectedlinename;
-    private String    destuniqueid;
-    private String    sourcepriority;
-    private String    localtwocalleridname;
-    private String    localtwoconnectedlinenum;
-    private String    localonechannelstatedesc;
-    private String    id;
-    private String    localonelinkedid;
-    private String    localtwochannel;
-    private String    localonechannelstate;
-    private String    sourcecalleridnum;
-    private String    sourcechannelstate;
-    private String    sourcecontext;
-    private String    localtwoconnectedlinename;
-    private String    localtwouniqueid;
-    private String    localtwolinkedid;
-    private String    localonecalleridnum;
-    private String    localonelanguage;
-    private String    localonecalleridname;
-    private String    sourceconnectedlinename;
-    private String    localonepriority;
-    private String    sourcechannelstatedesc;
-    private String    localonechannel;
-    private String    sourcecalleridname;
-    private String    localtwocontext;
-    private String    sourcelinkedid;
-    private String    sourcelanguage;
-    private String    localtwoexten;
-    private String    localtwochannelstatedesc;
-    private String    sourcechannel;
-    private String    localtwopriority;
+    private Integer id;
+    private String destUniqueId;
+
+    private String localOneChannel;
+    private String localOneChannelState;
+    private String localOneChannelStateDesc;
+    private String localOneCallerIDNum;
+    private String localOneCallerIDName;
+    private String localOneConnectedLineNum;
+    private String localOneConnectedLineName;
+    private String localOneAccountCode;
+    private String localOneContext;
+    private String localOneExten;
+    private Integer localOnePriority;
+    private String localOneUniqueid;
+    private String localOneLinkedid;
+
+    private String localTwoChannel;
+    private String localTwoChannelState;
+    private String localTwoChannelStateDesc;
+    private String localTwoCallerIDNum;
+    private String localTwoCallerIDName;
+    private String localTwoConnectedLineNum;
+    private String localTwoConnectedLineName;
+    private String localTwoAccountCode;
+    private String localTwoContext;
+    private String localTwoExten;
+    private Integer localTwoPriority;
+    private String localTwoUniqueid;
+    private String localTwoLinkedid;
+
+    private String sourceChannel;
+    private String sourceChannelState;
+    private String sourceChannelStateDesc;
+    private String sourceCallerIDNum;
+    private String sourceCallerIDName;
+    private String sourceConnectedLineNum;
+    private String sourceConnectedLineName;
+    private String sourceAccountCode;
+    private String sourceContext;
+    private String sourceExten;
+    private Integer sourcePriority;
+    private String sourceUniqueid;
+    private String sourceLinkedid;
+
+    private String localTwoLanguage;
+    private String localOneLanguage;
+    private String sourceLanguage;
+
     private String    privilege;
-    private String    localtwolanguage;
-    private String    localtwocalleridnum;
-    private String    localoneuniqueid;
-    private String    localtwochannelstate;
-    private String    sourceexten;
-
-	
-	public LocalOptimizationBeginEvent(Object source) {
-		super(source);
-	}
-
-	/**
-	 * @return the localonecontext
-	 */
-	public String getLocalonecontext() {
-		return localonecontext;
-	}
-
-	/**
-	 * @param localonecontext the localonecontext to set
-	 */
-	public void setLocalonecontext(String localonecontext) {
-		this.localonecontext = localonecontext;
-	}
-
-	/**
-	 * @return the localoneconnectedlinenum
-	 */
-	public String getLocaloneconnectedlinenum() {
-		return localoneconnectedlinenum;
-	}
-
-	/**
-	 * @param localoneconnectedlinenum the localoneconnectedlinenum to set
-	 */
-	public void setLocaloneconnectedlinenum(String localoneconnectedlinenum) {
-		this.localoneconnectedlinenum = localoneconnectedlinenum;
-	}
-
-	/**
-	 * @return the sourceuniqueid
-	 */
-	public String getSourceuniqueid() {
-		return sourceuniqueid;
-	}
-
-	/**
-	 * @param sourceuniqueid the sourceuniqueid to set
-	 */
-	public void setSourceuniqueid(String sourceuniqueid) {
-		this.sourceuniqueid = sourceuniqueid;
-	}
-
-	/**
-	 * @return the sourceconnectedlinenum
-	 */
-	public String getSourceconnectedlinenum() {
-		return sourceconnectedlinenum;
-	}
-
-	/**
-	 * @param sourceconnectedlinenum the sourceconnectedlinenum to set
-	 */
-	public void setSourceconnectedlinenum(String sourceconnectedlinenum) {
-		this.sourceconnectedlinenum = sourceconnectedlinenum;
-	}
-
-	/**
-	 * @return the localoneconnectedlinename
-	 */
-	public String getLocaloneconnectedlinename() {
-		return localoneconnectedlinename;
-	}
-
-	/**
-	 * @param localoneconnectedlinename the localoneconnectedlinename to set
-	 */
-	public void setLocaloneconnectedlinename(String localoneconnectedlinename) {
-		this.localoneconnectedlinename = localoneconnectedlinename;
-	}
-
-	/**
-	 * @return the destuniqueid
-	 */
-	public String getDestuniqueid() {
-		return destuniqueid;
-	}
-
-	/**
-	 * @param destuniqueid the destuniqueid to set
-	 */
-	public void setDestuniqueid(String destuniqueid) {
-		this.destuniqueid = destuniqueid;
-	}
-
-	/**
-	 * @return the sourcepriority
-	 */
-	public String getSourcepriority() {
-		return sourcepriority;
-	}
-
-	/**
-	 * @param sourcepriority the sourcepriority to set
-	 */
-	public void setSourcepriority(String sourcepriority) {
-		this.sourcepriority = sourcepriority;
-	}
-
-	/**
-	 * @return the localtwocalleridname
-	 */
-	public String getLocaltwocalleridname() {
-		return localtwocalleridname;
-	}
-
-	/**
-	 * @param localtwocalleridname the localtwocalleridname to set
-	 */
-	public void setLocaltwocalleridname(String localtwocalleridname) {
-		this.localtwocalleridname = localtwocalleridname;
-	}
-
-	/**
-	 * @return the localtwoconnectedlinenum
-	 */
-	public String getLocaltwoconnectedlinenum() {
-		return localtwoconnectedlinenum;
-	}
-
-	/**
-	 * @param localtwoconnectedlinenum the localtwoconnectedlinenum to set
-	 */
-	public void setLocaltwoconnectedlinenum(String localtwoconnectedlinenum) {
-		this.localtwoconnectedlinenum = localtwoconnectedlinenum;
-	}
-
-	/**
-	 * @return the localonechannelstatedesc
-	 */
-	public String getLocalonechannelstatedesc() {
-		return localonechannelstatedesc;
-	}
-
-	/**
-	 * @param localonechannelstatedesc the localonechannelstatedesc to set
-	 */
-	public void setLocalonechannelstatedesc(String localonechannelstatedesc) {
-		this.localonechannelstatedesc = localonechannelstatedesc;
-	}
-
-	/**
-	 * @return the id
-	 */
-	public String getId() {
-		return id;
-	}
-
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	/**
-	 * @return the localonelinkedid
-	 */
-	public String getLocalonelinkedid() {
-		return localonelinkedid;
-	}
-
-	/**
-	 * @param localonelinkedid the localonelinkedid to set
-	 */
-	public void setLocalonelinkedid(String localonelinkedid) {
-		this.localonelinkedid = localonelinkedid;
-	}
-
-	/**
-	 * @return the localtwochannel
-	 */
-	public String getLocaltwochannel() {
-		return localtwochannel;
-	}
-
-	/**
-	 * @param localtwochannel the localtwochannel to set
-	 */
-	public void setLocaltwochannel(String localtwochannel) {
-		this.localtwochannel = localtwochannel;
-	}
-
-	/**
-	 * @return the localonechannelstate
-	 */
-	public String getLocalonechannelstate() {
-		return localonechannelstate;
-	}
-
-	/**
-	 * @param localonechannelstate the localonechannelstate to set
-	 */
-	public void setLocalonechannelstate(String localonechannelstate) {
-		this.localonechannelstate = localonechannelstate;
-	}
-
-	/**
-	 * @return the sourcecalleridnum
-	 */
-	public String getSourcecalleridnum() {
-		return sourcecalleridnum;
-	}
-
-	/**
-	 * @param sourcecalleridnum the sourcecalleridnum to set
-	 */
-	public void setSourcecalleridnum(String sourcecalleridnum) {
-		this.sourcecalleridnum = sourcecalleridnum;
-	}
-
-	/**
-	 * @return the sourcechannelstate
-	 */
-	public String getSourcechannelstate() {
-		return sourcechannelstate;
-	}
-
-	/**
-	 * @param sourcechannelstate the sourcechannelstate to set
-	 */
-	public void setSourcechannelstate(String sourcechannelstate) {
-		this.sourcechannelstate = sourcechannelstate;
-	}
-
-	/**
-	 * @return the sourcecontext
-	 */
-	public String getSourcecontext() {
-		return sourcecontext;
-	}
-
-	/**
-	 * @param sourcecontext the sourcecontext to set
-	 */
-	public void setSourcecontext(String sourcecontext) {
-		this.sourcecontext = sourcecontext;
-	}
-
-	/**
-	 * @return the localtwoconnectedlinename
-	 */
-	public String getLocaltwoconnectedlinename() {
-		return localtwoconnectedlinename;
-	}
-
-	/**
-	 * @param localtwoconnectedlinename the localtwoconnectedlinename to set
-	 */
-	public void setLocaltwoconnectedlinename(String localtwoconnectedlinename) {
-		this.localtwoconnectedlinename = localtwoconnectedlinename;
-	}
-
-	/**
-	 * @return the localtwouniqueid
-	 */
-	public String getLocaltwouniqueid() {
-		return localtwouniqueid;
-	}
-
-	/**
-	 * @param localtwouniqueid the localtwouniqueid to set
-	 */
-	public void setLocaltwouniqueid(String localtwouniqueid) {
-		this.localtwouniqueid = localtwouniqueid;
-	}
-
-	/**
-	 * @return the localtwolinkedid
-	 */
-	public String getLocaltwolinkedid() {
-		return localtwolinkedid;
-	}
-
-	/**
-	 * @param localtwolinkedid the localtwolinkedid to set
-	 */
-	public void setLocaltwolinkedid(String localtwolinkedid) {
-		this.localtwolinkedid = localtwolinkedid;
-	}
-
-	/**
-	 * @return the localonecalleridnum
-	 */
-	public String getLocalonecalleridnum() {
-		return localonecalleridnum;
-	}
-
-	/**
-	 * @param localonecalleridnum the localonecalleridnum to set
-	 */
-	public void setLocalonecalleridnum(String localonecalleridnum) {
-		this.localonecalleridnum = localonecalleridnum;
-	}
-
-	/**
-	 * @return the localonelanguage
-	 */
-	public String getLocalonelanguage() {
-		return localonelanguage;
-	}
-
-	/**
-	 * @param localonelanguage the localonelanguage to set
-	 */
-	public void setLocalonelanguage(String localonelanguage) {
-		this.localonelanguage = localonelanguage;
-	}
-
-	/**
-	 * @return the localonecalleridname
-	 */
-	public String getLocalonecalleridname() {
-		return localonecalleridname;
-	}
-
-	/**
-	 * @param localonecalleridname the localonecalleridname to set
-	 */
-	public void setLocalonecalleridname(String localonecalleridname) {
-		this.localonecalleridname = localonecalleridname;
-	}
-
-	/**
-	 * @return the sourceconnectedlinename
-	 */
-	public String getSourceconnectedlinename() {
-		return sourceconnectedlinename;
-	}
-
-	/**
-	 * @param sourceconnectedlinename the sourceconnectedlinename to set
-	 */
-	public void setSourceconnectedlinename(String sourceconnectedlinename) {
-		this.sourceconnectedlinename = sourceconnectedlinename;
-	}
-
-	/**
-	 * @return the localonepriority
-	 */
-	public String getLocalonepriority() {
-		return localonepriority;
-	}
-
-	/**
-	 * @param localonepriority the localonepriority to set
-	 */
-	public void setLocalonepriority(String localonepriority) {
-		this.localonepriority = localonepriority;
-	}
-
-	/**
-	 * @return the sourcechannelstatedesc
-	 */
-	public String getSourcechannelstatedesc() {
-		return sourcechannelstatedesc;
-	}
-
-	/**
-	 * @param sourcechannelstatedesc the sourcechannelstatedesc to set
-	 */
-	public void setSourcechannelstatedesc(String sourcechannelstatedesc) {
-		this.sourcechannelstatedesc = sourcechannelstatedesc;
-	}
-
-	/**
-	 * @return the localonechannel
-	 */
-	public String getLocalonechannel() {
-		return localonechannel;
-	}
-
-	/**
-	 * @param localonechannel the localonechannel to set
-	 */
-	public void setLocalonechannel(String localonechannel) {
-		this.localonechannel = localonechannel;
-	}
-
-	/**
-	 * @return the sourcecalleridname
-	 */
-	public String getSourcecalleridname() {
-		return sourcecalleridname;
-	}
-
-	/**
-	 * @param sourcecalleridname the sourcecalleridname to set
-	 */
-	public void setSourcecalleridname(String sourcecalleridname) {
-		this.sourcecalleridname = sourcecalleridname;
-	}
-
-	/**
-	 * @return the localtwocontext
-	 */
-	public String getLocaltwocontext() {
-		return localtwocontext;
-	}
-
-	/**
-	 * @param localtwocontext the localtwocontext to set
-	 */
-	public void setLocaltwocontext(String localtwocontext) {
-		this.localtwocontext = localtwocontext;
-	}
-
-	/**
-	 * @return the sourcelinkedid
-	 */
-	public String getSourcelinkedid() {
-		return sourcelinkedid;
-	}
-
-	/**
-	 * @param sourcelinkedid the sourcelinkedid to set
-	 */
-	public void setSourcelinkedid(String sourcelinkedid) {
-		this.sourcelinkedid = sourcelinkedid;
-	}
-
-	/**
-	 * @return the sourcelanguage
-	 */
-	public String getSourcelanguage() {
-		return sourcelanguage;
-	}
-
-	/**
-	 * @param sourcelanguage the sourcelanguage to set
-	 */
-	public void setSourcelanguage(String sourcelanguage) {
-		this.sourcelanguage = sourcelanguage;
-	}
-
-	/**
-	 * @return the localtwoexten
-	 */
-	public String getLocaltwoexten() {
-		return localtwoexten;
-	}
-
-	/**
-	 * @param localtwoexten the localtwoexten to set
-	 */
-	public void setLocaltwoexten(String localtwoexten) {
-		this.localtwoexten = localtwoexten;
-	}
-
-	/**
-	 * @return the localtwochannelstatedesc
-	 */
-	public String getLocaltwochannelstatedesc() {
-		return localtwochannelstatedesc;
-	}
-
-	/**
-	 * @param localtwochannelstatedesc the localtwochannelstatedesc to set
-	 */
-	public void setLocaltwochannelstatedesc(String localtwochannelstatedesc) {
-		this.localtwochannelstatedesc = localtwochannelstatedesc;
-	}
-
-	/**
-	 * @return the sourcechannel
-	 */
-	public String getSourcechannel() {
-		return sourcechannel;
-	}
-
-	/**
-	 * @param sourcechannel the sourcechannel to set
-	 */
-	public void setSourcechannel(String sourcechannel) {
-		this.sourcechannel = sourcechannel;
-	}
-
-	/**
-	 * @return the localtwopriority
-	 */
-	public String getLocaltwopriority() {
-		return localtwopriority;
-	}
-
-	/**
-	 * @param localtwopriority the localtwopriority to set
-	 */
-	public void setLocaltwopriority(String localtwopriority) {
-		this.localtwopriority = localtwopriority;
-	}
+
+    public LocalOptimizationBeginEvent(Object source)
+    {
+        super(source);
+    }
+
+    public Integer getId()
+    {
+        return this.id;
+    }
+
+    public void setId(Integer value)
+    {
+        this.id = value;
+    }
+
+    public String getDestUniqueId()
+    {
+        return this.destUniqueId;
+    }
+
+    public void setDestUniqueId(String value)
+    {
+        this.destUniqueId = value;
+    }
+
+    public String getLocalOneChannel()
+    {
+        return this.localOneChannel;
+    }
+
+    public void setLocalOneChannel(String value)
+    {
+        this.localOneChannel = value;
+    }
+
+    public String getLocalOneChannelState()
+    {
+        return this.localOneChannelState;
+    }
+
+    public void setLocalOneChannelState(String value)
+    {
+        this.localOneChannelState = value;
+    }
+
+    public String getLocalOneChannelStateDesc()
+    {
+        return this.localOneChannelStateDesc;
+    }
+
+    public void setLocalOneChannelStateDesc(String value)
+    {
+        this.localOneChannelStateDesc = value;
+    }
+
+    public String getLocalOneCallerIDNum()
+    {
+        return this.localOneCallerIDNum;
+    }
+
+    public void setLocalOneCallerIDNum(String value)
+    {
+        this.localOneCallerIDNum = value;
+    }
+
+    public String getLocalOneCallerIDName()
+    {
+        return this.localOneCallerIDName;
+    }
+
+    public void setLocalOneCallerIDName(String value)
+    {
+        this.localOneCallerIDName = value;
+    }
+
+    public String getLocalOneConnectedLineNum()
+    {
+        return this.localOneConnectedLineNum;
+    }
+
+    public void setLocalOneConnectedLineNum(String value)
+    {
+        this.localOneConnectedLineNum = value;
+    }
+
+    public String getLocalOneConnectedLineName()
+    {
+        return this.localOneConnectedLineName;
+    }
+
+    public void setLocalOneConnectedLineName(String value)
+    {
+        this.localOneConnectedLineName = value;
+    }
+
+    public String getLocalOneAccountCode()
+    {
+        return this.localOneAccountCode;
+    }
+
+    public void setLocalOneAccountCode(String value)
+    {
+        this.localOneAccountCode = value;
+    }
+
+    public String getLocalOneContext()
+    {
+        return this.localOneContext;
+    }
+
+    public void setLocalOneContext(String value)
+    {
+        this.localOneContext = value;
+    }
+
+    public String getLocalOneExten()
+    {
+        return this.localOneExten;
+    }
+
+    public void setLocalOneExten(String value)
+    {
+        this.localOneExten = value;
+    }
+
+    public Integer getLocalOnePriority()
+    {
+        return this.localOnePriority;
+    }
+
+    public void setLocalOnePriority(Integer value)
+    {
+        this.localOnePriority = value;
+    }
+
+    public String getLocalOneUniqueid()
+    {
+        return this.localOneUniqueid;
+    }
+
+    public void setLocalOneUniqueid(String value)
+    {
+        this.localOneUniqueid = value;
+    }
+
+    public String getLocalOneLinkedid()
+    {
+        return this.localOneLinkedid;
+    }
+
+    public void setLocalOneLinkedid(String value)
+    {
+        this.localOneLinkedid = value;
+    }
+
+    public String getLocalTwoChannel()
+    {
+        return this.localTwoChannel;
+    }
+
+    public void setLocalTwoChannel(String value)
+    {
+        this.localTwoChannel = value;
+    }
+
+    public String getLocalTwoChannelState()
+    {
+        return this.localTwoChannelState;
+    }
+
+    public void setLocalTwoChannelState(String value)
+    {
+        this.localTwoChannelState = value;
+    }
+
+    public String getLocalTwoChannelStateDesc()
+    {
+        return this.localTwoChannelStateDesc;
+    }
+
+    public void setLocalTwoChannelStateDesc(String value)
+    {
+        this.localTwoChannelStateDesc = value;
+    }
+
+    public String getLocalTwoCallerIDNum()
+    {
+        return this.localTwoCallerIDNum;
+    }
+
+    public void setLocalTwoCallerIDNum(String value)
+    {
+        this.localTwoCallerIDNum = value;
+    }
+
+    public String getLocalTwoCallerIDName()
+    {
+        return this.localTwoCallerIDName;
+    }
+
+    public void setLocalTwoCallerIDName(String value)
+    {
+        this.localTwoCallerIDName = value;
+    }
+
+    public String getLocalTwoConnectedLineNum()
+    {
+        return this.localTwoConnectedLineNum;
+    }
+
+    public void setLocalTwoConnectedLineNum(String value)
+    {
+        this.localTwoConnectedLineNum = value;
+    }
+
+    public String getLocalTwoConnectedLineName()
+    {
+        return this.localTwoConnectedLineName;
+    }
+
+    public void setLocalTwoConnectedLineName(String value)
+    {
+        this.localTwoConnectedLineName = value;
+    }
+
+    public String getLocalTwoAccountCode()
+    {
+        return this.localTwoAccountCode;
+    }
+
+    public void setLocalTwoAccountCode(String value)
+    {
+        this.localTwoAccountCode = value;
+    }
+
+    public String getLocalTwoContext()
+    {
+        return this.localTwoContext;
+    }
+
+    public void setLocalTwoContext(String value)
+    {
+        this.localTwoContext = value;
+    }
+
+    public String getLocalTwoExten()
+    {
+        return this.localTwoExten;
+    }
+
+    public void setLocalTwoExten(String value)
+    {
+        this.localTwoExten = value;
+    }
+
+    public Integer getLocalTwoPriority()
+    {
+        return this.localTwoPriority;
+    }
+
+    public void setLocalTwoPriority(Integer value)
+    {
+        this.localTwoPriority = value;
+    }
+
+    public String getLocalTwoUniqueid()
+    {
+        return this.localTwoUniqueid;
+    }
+
+    public void setLocalTwoUniqueid(String value)
+    {
+        this.localTwoUniqueid = value;
+    }
+
+    public String getLocalTwoLinkedid()
+    {
+        return this.localTwoLinkedid;
+    }
+
+    public void setLocalTwoLinkedid(String value)
+    {
+        this.localTwoLinkedid = value;
+    }
+
+    public String getSourceChannel()
+    {
+        return this.sourceChannel;
+    }
+
+    public void setSourceChannel(String value)
+    {
+        this.sourceChannel = value;
+    }
+
+    public String getSourceChannelState()
+    {
+        return this.sourceChannelState;
+    }
+
+    public void setSourceChannelState(String value)
+    {
+        this.sourceChannelState = value;
+    }
+
+    public String getSourceChannelStateDesc()
+    {
+        return this.sourceChannelStateDesc;
+    }
+
+    public void setSourceChannelStateDesc(String value)
+    {
+        this.sourceChannelStateDesc = value;
+    }
+
+    public String getSourceCallerIDNum()
+    {
+        return this.sourceCallerIDNum;
+    }
+
+    public void setSourceCallerIDNum(String value)
+    {
+        this.sourceCallerIDNum = value;
+    }
+
+    public String getSourceCallerIDName()
+    {
+        return this.sourceCallerIDName;
+    }
+
+    public void setSourceCallerIDName(String value)
+    {
+        this.sourceCallerIDName = value;
+    }
+
+    public String getSourceConnectedLineNum()
+    {
+        return this.sourceConnectedLineNum;
+    }
+
+    public void setSourceConnectedLineNum(String value)
+    {
+        this.sourceConnectedLineNum = value;
+    }
+
+    public String getSourceConnectedLineName()
+    {
+        return this.sourceConnectedLineName;
+    }
+
+    public void setSourceConnectedLineName(String value)
+    {
+        this.sourceConnectedLineName = value;
+    }
+
+    public String getSourceAccountCode()
+    {
+        return this.sourceAccountCode;
+    }
+
+    public void setSourceAccountCode(String value)
+    {
+        this.sourceAccountCode = value;
+    }
+
+    public String getSourceContext()
+    {
+        return this.sourceContext;
+    }
+
+    public void setSourceContext(String value)
+    {
+        this.sourceContext = value;
+    }
+
+    public String getSourceExten()
+    {
+        return this.sourceExten;
+    }
+
+    public void setSourceExten(String value)
+    {
+        this.sourceExten = value;
+    }
+
+    public Integer getSourcePriority()
+    {
+        return this.sourcePriority;
+    }
+
+    public void setSourcePriority(Integer value)
+    {
+        this.sourcePriority = value;
+    }
+
+    public String getSourceUniqueid()
+    {
+        return this.sourceUniqueid;
+    }
+
+    public void setSourceUniqueid(String value)
+    {
+        this.sourceUniqueid = value;
+    }
+
+    public String getSourceLinkedid()
+    {
+        return this.sourceLinkedid;
+    }
+
+    public void setSourceLinkedid(String value)
+    {
+        this.sourceLinkedid = value;
+    }
+
+    public String getLocalTwoLanguage()
+    {
+        return localTwoLanguage;
+    }
+
+    public void setLocalTwoLanguage(String localTwoLanguage)
+    {
+        this.localTwoLanguage = localTwoLanguage;
+    }
+
+    public String getLocalOneLanguage()
+    {
+        return localOneLanguage;
+    }
+
+    public void setLocalOneLanguage(String localOneLanguage)
+    {
+        this.localOneLanguage = localOneLanguage;
+    }
+
+    public String getSourceLanguage()
+    {
+        return sourceLanguage;
+    }
+
+    public void setSourceLanguage(String sourceLanguage)
+    {
+        this.sourceLanguage = sourceLanguage;
+    }
 
 	/**
 	 * @return the privilege
@@ -562,74 +535,5 @@ public class LocalOptimizationBeginEvent extends ManagerEvent {
 		this.privilege = privilege;
 	}
 
-	/**
-	 * @return the localtwolanguage
-	 */
-	public String getLocaltwolanguage() {
-		return localtwolanguage;
-	}
 
-	/**
-	 * @param localtwolanguage the localtwolanguage to set
-	 */
-	public void setLocaltwolanguage(String localtwolanguage) {
-		this.localtwolanguage = localtwolanguage;
-	}
-
-	/**
-	 * @return the localtwocalleridnum
-	 */
-	public String getLocaltwocalleridnum() {
-		return localtwocalleridnum;
-	}
-
-	/**
-	 * @param localtwocalleridnum the localtwocalleridnum to set
-	 */
-	public void setLocaltwocalleridnum(String localtwocalleridnum) {
-		this.localtwocalleridnum = localtwocalleridnum;
-	}
-
-	/**
-	 * @return the localoneuniqueid
-	 */
-	public String getLocaloneuniqueid() {
-		return localoneuniqueid;
-	}
-
-	/**
-	 * @param localoneuniqueid the localoneuniqueid to set
-	 */
-	public void setLocaloneuniqueid(String localoneuniqueid) {
-		this.localoneuniqueid = localoneuniqueid;
-	}
-
-	/**
-	 * @return the localtwochannelstate
-	 */
-	public String getLocaltwochannelstate() {
-		return localtwochannelstate;
-	}
-
-	/**
-	 * @param localtwochannelstate the localtwochannelstate to set
-	 */
-	public void setLocaltwochannelstate(String localtwochannelstate) {
-		this.localtwochannelstate = localtwochannelstate;
-	}
-
-	/**
-	 * @return the sourceexten
-	 */
-	public String getSourceexten() {
-		return sourceexten;
-	}
-
-	/**
-	 * @param sourceexten the sourceexten to set
-	 */
-	public void setSourceexten(String sourceexten) {
-		this.sourceexten = sourceexten;
-	}
-	
 }
